@@ -56,10 +56,22 @@
           transition: left .25s;
       }
       .scannedhidden{
+        position: fixed;
+        display:inline-block;
+        width: 100px;
+        background-color: white;
+        height: 100%;
+        top: 0px;
         left: -100px;
         transition: left .25s;
       }
       .hinthidden{
+        position: fixed;
+        display: inline-block;
+        width: 100px;
+        background-color: white;
+        height: 100%;
+        top: 0px;
         right: -100px;
         transition: right .25s;
       }
@@ -193,13 +205,13 @@
     var roomName = currentUrl.search.substr(1);
     var room = document.querySelector('[sharedspace]');
     var box1 = document.querySelector('#image1');
+
+    //These lines fix a scrolling problem.
     var fixed = document.getElementById('buttonChanger');
-
     fixed.addEventListener('touchmove', function(e) {
-
             e.preventDefault();
-
     }, false);
+
 /*
     function myChecker(){
       if(document.getElementById("userInput").innerHTML == "hello"){
