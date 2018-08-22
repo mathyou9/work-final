@@ -1,0 +1,31 @@
+body{
+  width:100%;
+  height: 100%;
+  overflow: hidden;
+  margin: 0px;
+  padding: 0px;
+  background-color: rgba(200, 200, 200, 1);
+  text-align: center;
+}
+.container{
+  width: 100%;
+  height: 100%;
+}
+.comicImg{
+  width: 50%;
+  height: 50%;
+  position: absolute;
+  display: block;
+  left: 25%;
+  top: 25%;
+}
+.continue{
+  width: 100px;
+  position: absolute;
+  display: block;
+  bottom: 0px;
+  right: 0px;
+  height: 50px;
+  background-color: rgba(50,50,50,1);
+  color: white;
+}
