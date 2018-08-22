@@ -1,0 +1,56 @@
+<html>
+  <head>
+    <!-- if you need to open this in a web browser click on live preview -->
+    <!-- if this is your first time looking at html skip down to the body tag. It looks like this <body> -->
+    <style>
+      .showDiv{
+        position: relative;
+        text-align: center;
+        width: 50%;
+        left: 25%;
+        background-color: black;
+        color: white;
+      }
+      .HTMLmain{
+        width: 100%;
+      }
+      .divName{
+        width:50%;
+        height: 10px;
+        background-color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Welcome to a HTML, CSS, Javascript, crash course.</h1>
+    <div class="HTMLmain">
+      <h1>HTML</h1> <br  />
+      There are few things you should know about HTML. Everything begins and end with tags. Such as
+      &lt;html&gt;&lt;/html&gt; <br  />
+      use &lt;br /&gt; to create a new line like so: <br  />
+      new line. <br />
+      use &lt;div&gt; tags to create groups of html objects that you can use to arrange things.
+      <div>
+        You probably can't notice but this text is in a div tag. The reason why div tags are so important is you can size and position many or even just one element very easily.
+      </div>
+      <div class="showDiv">
+        This div tag has its text centered, is 50% the original width of the window, its background-color is black, and its text color is white.
+      </div>
+      To insert images use &lt;img /&gt; with parameters like src, width and height. like this: <br />
+      &lt;img src="img/Placeholder.png" height="100px"/&gt; <br  />
+      <img src="img/Placeholder.png" height="100px"/> <br />
+      These are the basics of HTML, really thats it! The rest you can just look online and find really easy answers for specific situations.
+    </div>
+    <div class="CSSmain">
+      <h1>CSS</h1>
+      css is the best part of creating web-pages this is when you can decide how you want your webpage to look like visually.
+      For instance alot of parameters that are placed in HTML like the height tag in the img placeholder above can be specified in CSS. So whats the advantage of doing it at the top. The advantage is its all in one spot, and there are a ton more things you can change in css that isnt even possible with just HTML alone. So lets get started: <br  /> <br />
+      A great practice to get into is placing content in DIV tags as you can change pretty much whatever you want within them. Then to use CSS you first need a name for DIV tag such as divName. In the HTML body you would declare this just like this. &lt;div class="divName"&gt; Now up in the &lt;style&gt; section of your webpage, which should be up in the &lt;head&gt; section you can type .divName{} and anything that you place in the brackets will appear as if it were incorporated right into the webpage. .divName{width: 50%;} would give the DIV tag with the class-name divName a width attribute of 50%. Like this:<br/>
+      <div class="divName">
+
+      </div>
+      I colored it black so that you could see the div.
+    </br/>
+    </div>
+  </body>
+</html>
