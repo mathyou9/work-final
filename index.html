@@ -37,19 +37,47 @@
           height: 100%;
 
       }
-      .bottom{
+      .scanned{
           position: fixed;
-          width: 100%;
+          display:inline-block;
+          width: 100px;
           background-color: white;
-          height: 100px;
-          bottom: 0px;
+          height: 100%;
           left: 0%;
+          top: 0px;
           text-align: center;
+      }
+      .hints{
+        position: fixed;
+        display: inline-block;
+        width: 100px;
+        background-color: white;
+        height: 100%;
+        right: 0px;
+        top: 0px;
+        text-align: center;
+      }
+      .buttonChanger{
+        width: 100px;
+        height: 100px;
+        position: fixed;
+        background-image: url("img/Menu.png");
+        background-size: 100px 100px;
+        background-repeat: no-repeat;
+        z-index: 100;
+        margin:0px;
+        padding: 0px;
+        right: 0px;
+        bottom: 0px;
+        color: white;
+        text-align: center;
+        font-size: 20px;
       }
       .prize1{
           width: 50px;
           height: 50px;
-          background: url(img/bc1.png);
+          margin: 10px;
+          background: url(img/Placeholder.png);
           display: inline-block;
           background-size: contain;
       }
@@ -94,9 +122,16 @@
 </head>
 
 <body>
-  <div class="bottom" id="changeThisClass">
+  <div class="hide" id="changeThisClass1">
     <div class="items">Things you have found:</div>
     <div class="hide" id="prize1"></div>
+  </div>
+  <div class="hide" id="changeThisClass2">
+    <div class="items">
+      Hints:
+    </div>
+  </div>
+  <div class="buttonChanger" id="buttonChanger" onclick="loadMenus();">
   </div>
   <!--
   <div class="hide" id="overlayID">
@@ -113,7 +148,7 @@
   </div>
   -->
 
-  <a-scene preloader embedded sharedspace avatars arjs='debugUIEnabled:false;'>
+  <a-scene vr-mode-ui="enabled: false" preloader embedded sharedspace avatars arjs='debugUIEnabled:false;'>
     <a-assets>
       <img id="puzzle1" src="img/placeholder.png" />
       <!-- this is what animation files will look like.
@@ -153,16 +188,24 @@
     }
 */
 
+    function loadMenus(){
+      document.getElementById("changeThisClass1").classList.toggle("hide");
+      document.getElementById("changeThisClass1").classList.toggle("scanned");
+      document.getElementById("changeThisClass2").classList.toggle("hide");
+      document.getElementById("changeThisClass2").classList.toggle("hints");
+
+    }
+
     function overlayRemove(){
       document.getElementById("overlayID").classList.remove("overlay");
       document.getElementById("overlayID").classList.add("hide");
     }
 
     box1.addEventListener("click", function() {
-      document.getElementById('overlayID').classList.remove("hide");
-        document.getElementById('overlayID').classList.add("overlay");
-      //document.getElementById("prize1").classList.toggle("hide");
-      //document.getElementById("prize1").classList.toggle("prize1");
+      //document.getElementById('overlayID').classList.remove("hide");
+      //document.getElementById('overlayID').classList.add("overlay");
+      document.getElementById("prize1").classList.toggle("hide");
+      document.getElementById("prize1").classList.toggle("prize1");
       room.components.sharedspace.send('*', {
         type: 'image1'
       })
