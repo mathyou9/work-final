@@ -56,11 +56,11 @@
           transition: left .25s;
       }
       .scannedhidden{
-        left: 0px;
+        left: -100px;
         transition: left .25s;
       }
       .hinthidden{
-        right: 0px;
+        right: -100px;
         transition: right .25s;
       }
       .hints{
@@ -89,7 +89,6 @@
         color: white;
         text-align: center;
         font-size: 20px;
-        overflow: hidden;
       }
       .prize1{
           width: 50px;
@@ -194,6 +193,13 @@
     var roomName = currentUrl.search.substr(1);
     var room = document.querySelector('[sharedspace]');
     var box1 = document.querySelector('#image1');
+    var fixed = document.getElementById('fixed');
+
+    fixed.addEventListener('touchmove', function(e) {
+
+            e.preventDefault();
+
+    }, false);
 /*
     function myChecker(){
       if(document.getElementById("userInput").innerHTML == "hello"){
