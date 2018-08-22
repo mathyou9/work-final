@@ -47,6 +47,15 @@
           left: 0%;
           top: 0px;
           text-align: center;
+          transition: left .25s;
+      }
+      .scannedhidden{
+        left: -100px;
+        transition: left .25s;
+      }
+      .hinthidden{
+        right: -100px;
+        transition: right .25s;
       }
       .hints{
         position: fixed;
@@ -57,6 +66,7 @@
         right: 0px;
         top: 0px;
         text-align: center;
+        transition: right .25s;
       }
       .buttonChanger{
         width: 100px;
@@ -85,6 +95,7 @@
 
       .hide{
           display: none;
+          transition: all 1s;
       }
       .items{
           display: block;
@@ -123,11 +134,11 @@
 </head>
 
 <body>
-  <div class="hide" id="changeThisClass1">
+  <div class="scannedhidden" id="changeThisClass1">
     <div class="items">Things you have found:</div>
     <div class="hide" id="prize1"></div>
   </div>
-  <div class="hide" id="changeThisClass2">
+  <div class="hinthidden" id="changeThisClass2">
     <div class="items">
       Hints:
     </div>
@@ -190,9 +201,9 @@
 */
 
     function loadMenus(){
-      document.getElementById("changeThisClass1").classList.toggle("hide");
+      document.getElementById("changeThisClass1").classList.toggle("scannedhidden");
       document.getElementById("changeThisClass1").classList.toggle("scanned");
-      document.getElementById("changeThisClass2").classList.toggle("hide");
+      document.getElementById("changeThisClass2").classList.toggle("hinthidden");
       document.getElementById("changeThisClass2").classList.toggle("hints");
 
     }
