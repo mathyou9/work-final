@@ -181,7 +181,11 @@
 
   <a-scene vr-mode-ui="enabled: false" preloader embedded sharedspace avatars arjs='debugUIEnabled:false;'>
     <a-assets>
-      <img id="puzzle1" src="img/placeholder.png" />
+      <img id="puzzle1" src="img/YearConstruction.png" />
+      <img id="puzzle2" src="img/MusicReturn.png" />
+      <a-asset-item id="musicStand" src="img/MusicStandRejection.gltf"></a-asset-item>
+      <a-asset-item id="unlocked" src="img/lockUnlocked_01.gltf"></a-asset-item>
+      <a-asset-item id="locked" src="img/lockLocked_01.gltf"></a-asset-item>
       <!-- this is what animation files will look like.
       <a-asset-item id="musicStand" src="img/MusicStandRejection.gltf"></a-asset-item>
     -->
@@ -203,13 +207,15 @@
       <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#puzzle1" material="alphaTest:0.5" shadow></a-image>
     </a-marker>
     <a-marker id="image1" preset="pattern" type="pattern" url="markers/harpTarget.patt">
-      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#puzzle1" material="alphaTest:0.5" shadow></a-image>
+      <a-entity gltf-model="#musicStand" position="0 1 1" rotation="-90 0 0" material="alphaTest:0.5" shadow animation-mixer></a-entity>
+      <a-light type="point" color="#FFEA86" position="0 0 -9"></a-light>
     </a-marker>
     <a-marker id="image1" preset="pattern" type="pattern" url="markers/HBLeeTarget.patt">
       <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#puzzle1" material="alphaTest:0.5" shadow></a-image>
     </a-marker>
     <a-marker id="image1" preset="pattern" type="pattern" url="markers/primroseAlbum1Target.patt">
-      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#puzzle1" material="alphaTest:0.5" shadow></a-image>
+      <a-entity gltf-model="#locked" position="0 1 1" rotation="-90 0 0" material="alphaTest:0.5" shadow animation-mixer></a-entity>
+      <a-light type="point" color="#FFEA86" position="0 0 -9"></a-light>
     </a-marker>
     <a-marker id="image1" preset="pattern" type="pattern" url="markers/primroseAlbum2Target.patt">
       <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#puzzle1" material="alphaTest:0.5" shadow></a-image>
@@ -224,9 +230,6 @@
       <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#puzzle1" material="alphaTest:0.5" shadow></a-image>
     </a-marker>
     <a-marker id="image1" preset="pattern" type="pattern" url="markers/repeatTarget.patt">
-      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#puzzle1" material="alphaTest:0.5" shadow></a-image>
-    </a-marker>
-    <a-marker id="image1" preset="pattern" type="pattern" url="markers/skullTarget.patt">
       <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#puzzle1" material="alphaTest:0.5" shadow></a-image>
     </a-marker>
     <a-marker id="image1" preset="pattern" type="pattern" url="markers/trebleTarget.patt">
