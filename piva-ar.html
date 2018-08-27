@@ -111,6 +111,14 @@
           display: inline-block;
           background-size: contain;
       }
+      .prize2{
+          width: 50px;
+          height: 50px;
+          margin: 10px;
+          background: url(img/fullFloorMap.png);
+          display: inline-block;
+          background-size: contain;
+      }
 
       .hide{
           display: none;
@@ -149,6 +157,62 @@
         background-color: silver;
         top: 67vh;
       }
+      .map1{
+        display: inline-block;
+        position: relative;
+        width: 30%;
+        background-image: url('img/papermap5.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        height: 40%;
+      }
+      .map2{
+        display: inline-block;
+        position: relative;
+        width: 30%;
+        background-image: url('img/papermap_topcenter.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        height: 40%;
+      }
+      .map3{
+        display: inline-block;
+        position: relative;
+        width: 30%;
+        background-image: url('img/papermap_topright.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        height: 40%;
+      }
+      .map4{
+        display: inline-block;
+        position: relative;
+        width: 30%;
+        background-image: url('img/papermap_bottomleft.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        height: 40%;
+      }
+      .map5{
+        display: inline-block;
+        position: relative;
+        width: 30%;
+        background-image: url('img/papermap_bottomcenter.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        height: 40%;
+      }
+      .map6{
+        display: inline-block;
+        position: relative;
+        width: 30%;
+        background-image: url('img/papermap_bottomright.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        height: 40%;
+      }
+
+
   </style>
 </head>
 
@@ -156,6 +220,7 @@
   <div class="scannedhidden" id="changeThisClass1">
     <div class="items">Things you have found:</div>
     <div class="hide" id="prize1"></div>
+    <div class="hide" id="prize2"></div>
   </div>
   <div class="hinthidden" id="changeThisClass2">
     <div class="items">
@@ -178,11 +243,31 @@
     </div>
   </div>
   -->
+  <div class="hide" id="redeemOverlay">
+    <div class="centerDiv">
+      Click to arrange the map pieces the way that they should be. <br />
+      <div class="map1" id="map1location" onclick="changeimage(this);"></div>
+      <div class="map1" id="map2location" onclick="changeimage(this);"></div>
+      <div class="map1" id="map3location" onclick="changeimage(this);"></div>
+      <div class="map1" id="map4location" onclick="changeimage(this);"></div>
+      <div class="map1" id="map5location" onclick="changeimage(this);"></div>
+      <div class="map1" id="map6location" onclick="changeimage(this);"></div>
+      <div class="mapchecker" id="mapchecker" onclick="mapcheckerfunction();">
+        Click here to see if the pattern is correct
+      </div>
+    </div>
+  </div>
 
   <a-scene vr-mode-ui="enabled: false" preloader embedded sharedspace avatars arjs='debugUIEnabled:false;'>
     <a-assets>
       <img id="puzzle1" src="img/YearConstruction.png" />
       <img id="puzzle2" src="img/MusicReturn.png" />
+      <img id="mappiece1" src="img/floormap1.png" />
+      <img id="mappiece2" src="img/floormap2.png" />
+      <img id="mappiece3" src="img/floormap3.png" />
+      <img id="mappiece4" src="img/floormap4.png" />
+      <img id="mappiece5" src="img/floormap5.png" />
+      <img id="mappiece6" src="img/floormap6.png" />
       <a-asset-item id="musicStand" src="img/MusicStandRejection.gltf"></a-asset-item>
       <a-asset-item id="unlocked" src="img/lockUnlocked_01.gltf"></a-asset-item>
       <a-asset-item id="locked" src="img/lock.gltf"></a-asset-item>
@@ -191,60 +276,80 @@
     -->
     </a-assets>
 
+    <!-- Map pieces -->
+    <a-marker id="mappiece1" preset="pattern" type="pattern" url="markers/papermap1.patt">
+      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#mappiece1" material="alphaTest:0.5" shadow></a-image>
+    </a-marker>
+    <a-marker id="mappiece2" preset="pattern" type="pattern" url="markers/papermap2.patt">
+      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#mappiece2" material="alphaTest:0.5" shadow></a-image>
+    </a-marker>
+    <a-marker id="mappiece3" preset="pattern" type="pattern" url="markers/papermap3.patt">
+      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#mappiece3" material="alphaTest:0.5" shadow></a-image>
+    </a-marker>
+    <a-marker id="mappiece4" preset="pattern" type="pattern" url="markers/papermap4.patt">
+      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#mappiece4" material="alphaTest:0.5" shadow></a-image>
+    </a-marker>
+    <a-marker id="mappiece5" preset="pattern" type="pattern" url="markers/papermap5.patt">
+      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#mappiece5" material="alphaTest:0.5" shadow></a-image>
+    </a-marker>
+    <a-marker id="mappiece6" preset="pattern" type="pattern" url="markers/papermap6.patt">
+      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#mappiece6" material="alphaTest:0.5" shadow></a-image>
+    </a-marker>
+
     <a-marker id="image1" preset="pattern" type="pattern" url="markers/bassClefTarget.patt">
       <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#puzzle1" material="alphaTest:0.5" shadow></a-image>
     </a-marker>
-    <a-marker id="image1" preset="pattern" type="pattern" url="markers/bowTarget.patt">
+    <a-marker id="image2" preset="pattern" type="pattern" url="markers/bowTarget.patt">
       <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#puzzle1" material="alphaTest:0.5" shadow></a-image>
     </a-marker>
-    <a-marker id="image1" preset="pattern" type="pattern" url="markers/cauldronTarget.patt">
+    <a-marker id="mapRedeemMarker" preset="pattern" type="pattern" url="markers/cauldronTarget.patt">
       <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#puzzle1" material="alphaTest:0.5" shadow></a-image>
     </a-marker>
-    <a-marker id="image1" preset="pattern" type="pattern" url="markers/eighthNoteTarget.patt">
+    <a-marker id="image3" preset="pattern" type="pattern" url="markers/eighthNoteTarget.patt">
       <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#puzzle1" material="alphaTest:0.5" shadow></a-image>
     </a-marker>
-    <a-marker id="image1" preset="pattern" type="pattern" url="markers/ghostTarget.patt">
+    <a-marker id="image4" preset="pattern" type="pattern" url="markers/ghostTarget.patt">
       <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#puzzle1" material="alphaTest:0.5" shadow></a-image>
     </a-marker>
-    <a-marker id="image1" preset="pattern" type="pattern" url="markers/harpTarget.patt">
+    <a-marker id="image5" preset="pattern" type="pattern" url="markers/harpTarget.patt">
       <a-entity gltf-model="#musicStand" position="0 1 1" rotation="-90 0 0" material="alphaTest:0.5" shadow animation-mixer></a-entity>
       <a-light type="point" color="#FFEA86" position="0 0 -9"></a-light>
     </a-marker>
-    <a-marker id="image1" preset="pattern" type="pattern" url="markers/HBLeeTarget.patt">
+    <a-marker id="image6" preset="pattern" type="pattern" url="markers/HBLeeTarget.patt">
       <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#puzzle1" material="alphaTest:0.5" shadow></a-image>
     </a-marker>
-    <a-marker id="image1" preset="pattern" type="pattern" url="markers/primroseAlbum1Target.patt">
+    <a-marker id="image7" preset="pattern" type="pattern" url="markers/primroseAlbum1Target.patt">
       <a-entity gltf-model="#locked" position="0 0.25 0" rotation="-90 0 0" material="alphaTest:0.5" shadow animation-mixer></a-entity>
       <a-light type="point" color="#ffffff" position="0 9 -9"></a-light>
     </a-marker>
-    <a-marker id="image1" preset="pattern" type="pattern" url="markers/primroseAlbum2Target.patt">
+    <a-marker id="image8" preset="pattern" type="pattern" url="markers/primroseAlbum2Target.patt">
       <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#puzzle1" material="alphaTest:0.5" shadow></a-image>
     </a-marker>
-    <a-marker id="image1" preset="pattern" type="pattern" url="markers/primroseAlbum3Target.patt">
+    <a-marker id="image9" preset="pattern" type="pattern" url="markers/primroseAlbum3Target.patt">
       <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#puzzle1" material="alphaTest:0.5" shadow></a-image>
     </a-marker>
-    <a-marker id="image1" preset="pattern" type="pattern" url="markers/primrosePortraitTarget.patt">
+    <a-marker id="image10" preset="pattern" type="pattern" url="markers/primrosePortraitTarget.patt">
       <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#puzzle1" material="alphaTest:0.5" shadow></a-image>
     </a-marker>
-    <a-marker id="image1" preset="pattern" type="pattern" url="markers/quarterNoteTarget.patt">
+    <a-marker id="image12" preset="pattern" type="pattern" url="markers/quarterNoteTarget.patt">
       <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#puzzle1" material="alphaTest:0.5" shadow></a-image>
     </a-marker>
-    <a-marker id="image1" preset="pattern" type="pattern" url="markers/repeatTarget.patt">
+    <a-marker id="image13" preset="pattern" type="pattern" url="markers/repeatTarget.patt">
       <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#puzzle1" material="alphaTest:0.5" shadow></a-image>
     </a-marker>
-    <a-marker id="image1" preset="pattern" type="pattern" url="markers/trebleTarget.patt">
+    <a-marker id="image14" preset="pattern" type="pattern" url="markers/trebleTarget.patt">
       <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#puzzle1" material="alphaTest:0.5" shadow></a-image>
     </a-marker>
-    <a-marker id="image1" preset="pattern" type="pattern" url="markers/viola1Target.patt">
+    <a-marker id="image15" preset="pattern" type="pattern" url="markers/viola1Target.patt">
       <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#puzzle1" material="alphaTest:0.5" shadow></a-image>
     </a-marker>
-    <a-marker id="image1" preset="pattern" type="pattern" url="markers/viola2Target.patt">
+    <a-marker id="image16" preset="pattern" type="pattern" url="markers/viola2Target.patt">
       <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#puzzle1" material="alphaTest:0.5" shadow></a-image>
     </a-marker>
-    <a-marker id="image1" preset="pattern" type="pattern" url="markers/viola3Target.patt">
+    <a-marker id="image17" preset="pattern" type="pattern" url="markers/viola3Target.patt">
       <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#puzzle1" material="alphaTest:0.5" shadow></a-image>
     </a-marker>
-    <a-marker id="image1" preset="pattern" type="pattern" url="markers/wholeNoteTarget.patt">
+    <a-marker id="image18" preset="pattern" type="pattern" url="markers/wholeNoteTarget.patt">
       <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#puzzle1" material="alphaTest:0.5" shadow></a-image>
     </a-marker>
 
@@ -262,7 +367,14 @@
     var currentUrl = new URL(window.location);
     var roomName = currentUrl.search.substr(1);
     var room = document.querySelector('[sharedspace]');
-    var box1 = document.querySelector('#image1');
+    var  box1 = document.querySelector('#image1');
+    var mapRedeem = document.querySelector('#mapRedeemMarker');
+    var location1 = document.getElementById("map1location");
+    var location2 = document.getElementById("map2location");
+    var location3 = document.getElementById("map3location");
+    var location4 = document.getElementById("map4location");
+    var location5 = document.getElementById("map5location");
+    var location6 = document.getElementById("map6location");
 
     //These lines fix a scrolling problem.
     var fixed = document.getElementById('buttonChanger');
@@ -282,6 +394,42 @@
       }
     }
 */
+  function changeimage(el){
+    if(el.className == "map1"){
+        el.classList.remove("map1");
+        el.classList.add("map2");
+    }
+    else if(el.className == "map2"){
+      el.classList.remove("map2");
+      el.classList.add("map3");
+    }
+    else if(el.className == "map3"){
+      el.classList.remove("map3");
+      el.classList.add("map4");
+    }
+    else if(el.className == "map4"){
+      el.classList.remove("map4");
+      el.classList.add("map5");
+    }
+    else if(el.className == "map5"){
+      el.classList.remove("map5");
+      el.classList.add("map6");
+    }
+    else if(el.className == "map6"){
+      el.classList.remove("map6");
+      el.classList.add("map1");
+    }
+  }
+
+  function mapcheckerfunction(){
+    if(location1.className == "map1" && location2.className == "map2" && location3.className == "map3" && location4.className == "map4" && location5.className == "map5" && location6.className == "map6"){
+      document.getElementById("prize2").classList.remove("hide");
+      document.getElementById("prize2").classList.add("prize2");
+      room.components.sharedspace.send('*', {
+        type: 'map'
+      })
+    }
+  }
 
     function loadMenus(){
       document.getElementById("changeThisClass1").classList.toggle("scannedhidden");
@@ -296,7 +444,12 @@
       document.getElementById("overlayID").classList.add("hide");
     }
 
-    box1.addEventListener("click", function() {
+    mapRedeem.addEventListener("click", function(){
+      document.getElementById('redeemOverlay').classList.remove("hide");
+      document.getElementById('redeemOverlay').classList.add("overlay");
+    });
+
+     box1.addEventListener("click", function() {
       //document.getElementById('overlayID').classList.remove("hide");
       //document.getElementById('overlayID').classList.add("overlay");
       document.getElementById("prize1").classList.toggle("hide");
@@ -321,6 +474,11 @@
         document.getElementById("prize1").classList.remove("hide");
         document.getElementById("prize1").classList.add("prize1");
       }
+      if (evt.detail.message.type === 'map') {
+        document.getElementById("prize2").classList.remove("hide");
+        document.getElementById("prize2").classList.add("prize2");
+      }
+
 
       /*
       if (evt.detail.message.type === 'image2') {
