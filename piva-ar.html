@@ -119,7 +119,6 @@
           display: inline-block;
           background-size: contain;
       }
-
       .hide{
           display: none;
           transition: all 1s;
@@ -211,8 +210,6 @@
         background-repeat: no-repeat;
         height: 40%;
       }
-
-
   </style>
 </head>
 
@@ -260,14 +257,31 @@
 
   <a-scene vr-mode-ui="enabled: false" preloader embedded sharedspace avatars arjs='debugUIEnabled:false;'>
     <a-assets>
-      <img id="puzzle1" src="img/YearConstruction.png" />
-      <img id="puzzle2" src="img/MusicReturn.png" />
+      <!-- map pieces -->
       <img id="mappiece1" src="img/floormap1.png" />
       <img id="mappiece2" src="img/floormap2.png" />
       <img id="mappiece3" src="img/floormap3.png" />
       <img id="mappiece4" src="img/floormap4.png" />
       <img id="mappiece5" src="img/floormap5.png" />
       <img id="mappiece6" src="img/floormap6.png" />
+      <!-- word find hot-cold -->
+      <img id="hotcold1" src="img/WordClues_1.png" />
+      <img id="hotcold2" src="img/WordClues_2.png" />
+      <img id="hotcold3" src="img/WordClues_3.png" />
+      <img id="hotcold4" src="img/WordClues_4.png" />
+      <img id="hotcold5" src="img/WordClues_5.png" />
+      <img id="hotcold6" src="img/WordClues_6.png" />
+      <img id="hotcold7" src="img/WordClues_7.png" />
+      <img id="hotcold8" src="img/WordClues_8.png" />
+      <!-- PIVA -->
+      <img id="PIVA1" src="img/Letter_P.mov" />
+      <img id="PIVA2" src="img/Letter_I.mov" />
+      <img id="PIVA3" src="img/Letter_V.mov" />
+      <img id="PIVA4" src="img/Letter_A.mov" />
+
+
+      <img id="puzzle1" src="img/YearConstruction.png" />
+      <img id="puzzle2" src="img/MusicReturn.png" />
       <a-asset-item id="musicStand" src="img/MusicStandRejection.gltf"></a-asset-item>
       <a-asset-item id="unlocked" src="img/lockUnlocked_01.gltf"></a-asset-item>
       <a-asset-item id="locked" src="img/lock.gltf"></a-asset-item>
@@ -295,35 +309,46 @@
     <a-marker id="mappiece6" preset="pattern" type="pattern" url="markers/papermap6.patt">
       <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#mappiece6" material="alphaTest:0.5" shadow></a-image>
     </a-marker>
-
-    <a-marker id="image1" preset="pattern" type="pattern" url="markers/bassClefTarget.patt">
-      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#puzzle1" material="alphaTest:0.5" shadow></a-image>
-    </a-marker>
-    <a-marker id="image2" preset="pattern" type="pattern" url="markers/bowTarget.patt">
-      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#puzzle1" material="alphaTest:0.5" shadow></a-image>
-    </a-marker>
+    <!-- gives the player the map -->
     <a-marker id="mapRedeemMarker" preset="pattern" type="pattern" url="markers/cauldronTarget.patt">
       <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#puzzle1" material="alphaTest:0.5" shadow></a-image>
     </a-marker>
-    <a-marker id="image3" preset="pattern" type="pattern" url="markers/eighthNoteTarget.patt">
-      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#puzzle1" material="alphaTest:0.5" shadow></a-image>
+
+    <!-- Word Clues -->
+    <a-marker id="image16" preset="pattern" type="pattern" url="markers/viola2Target.patt">
+      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#hotcold1" material="alphaTest:0.5" shadow></a-image>
     </a-marker>
-    <a-marker id="image4" preset="pattern" type="pattern" url="markers/ghostTarget.patt">
-      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#puzzle1" material="alphaTest:0.5" shadow></a-image>
-    </a-marker>
-    <a-marker id="image5" preset="pattern" type="pattern" url="markers/harpTarget.patt">
-      <a-entity gltf-model="#musicStand" position="0 1 1" rotation="-90 0 0" material="alphaTest:0.5" shadow animation-mixer></a-entity>
-      <a-light type="point" color="#FFEA86" position="0 0 -9"></a-light>
+    <a-marker id="image17" preset="pattern" type="pattern" url="markers/viola3Target.patt">
+      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#hotcold2" material="alphaTest:0.5" shadow></a-image>
     </a-marker>
     <a-marker id="image6" preset="pattern" type="pattern" url="markers/HBLeeTarget.patt">
+      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#hotcold3" material="alphaTest:0.5" shadow></a-image>
+    </a-marker>
+    <a-marker id="image3" preset="pattern" type="pattern" url="markers/eighthNoteTarget.patt">
+      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#hotcold4" material="alphaTest:0.5" shadow></a-image>
+    </a-marker>
+    <a-marker id="image1" preset="pattern" type="pattern" url="markers/bassClefTarget.patt">
+      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#hotcold5" material="alphaTest:0.5" shadow></a-image>
+    </a-marker>
+    <a-marker id="image4" preset="pattern" type="pattern" url="markers/ghostTarget.patt">
+      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#hotcold6" material="alphaTest:0.5" shadow></a-image>
+    </a-marker>
+    <a-marker id="image14" preset="pattern" type="pattern" url="markers/trebleTarget.patt">
+      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#hotcold7" material="alphaTest:0.5" shadow></a-image>
+    </a-marker>
+    <a-marker id="image12" preset="pattern" type="pattern" url="markers/quarterNoteTarget.patt">
+      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#hotcold8" material="alphaTest:0.5" shadow></a-image>
+    </a-marker>
+    <!-- PIVA -->
+    <a-marker id="image8" preset="pattern" type="pattern" url="markers/primroseAlbum2Target.patt">
       <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#puzzle1" material="alphaTest:0.5" shadow></a-image>
     </a-marker>
+
+
+
     <a-marker id="image7" preset="pattern" type="pattern" url="markers/primroseAlbum1Target.patt">
       <a-entity gltf-model="#locked" position="0 0.25 0" rotation="-90 0 0" material="alphaTest:0.5" shadow animation-mixer></a-entity>
       <a-light type="point" color="#ffffff" position="0 9 -9"></a-light>
-    </a-marker>
-    <a-marker id="image8" preset="pattern" type="pattern" url="markers/primroseAlbum2Target.patt">
-      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#puzzle1" material="alphaTest:0.5" shadow></a-image>
     </a-marker>
     <a-marker id="image9" preset="pattern" type="pattern" url="markers/primroseAlbum3Target.patt">
       <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#puzzle1" material="alphaTest:0.5" shadow></a-image>
@@ -331,26 +356,19 @@
     <a-marker id="image10" preset="pattern" type="pattern" url="markers/primrosePortraitTarget.patt">
       <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#puzzle1" material="alphaTest:0.5" shadow></a-image>
     </a-marker>
-    <a-marker id="image12" preset="pattern" type="pattern" url="markers/quarterNoteTarget.patt">
-      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#puzzle1" material="alphaTest:0.5" shadow></a-image>
-    </a-marker>
-    <a-marker id="image13" preset="pattern" type="pattern" url="markers/repeatTarget.patt">
-      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#puzzle1" material="alphaTest:0.5" shadow></a-image>
-    </a-marker>
-    <a-marker id="image14" preset="pattern" type="pattern" url="markers/trebleTarget.patt">
-      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#puzzle1" material="alphaTest:0.5" shadow></a-image>
-    </a-marker>
     <a-marker id="image15" preset="pattern" type="pattern" url="markers/viola1Target.patt">
-      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#puzzle1" material="alphaTest:0.5" shadow></a-image>
-    </a-marker>
-    <a-marker id="image16" preset="pattern" type="pattern" url="markers/viola2Target.patt">
-      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#puzzle1" material="alphaTest:0.5" shadow></a-image>
-    </a-marker>
-    <a-marker id="image17" preset="pattern" type="pattern" url="markers/viola3Target.patt">
       <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#puzzle1" material="alphaTest:0.5" shadow></a-image>
     </a-marker>
     <a-marker id="image18" preset="pattern" type="pattern" url="markers/wholeNoteTarget.patt">
       <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#puzzle1" material="alphaTest:0.5" shadow></a-image>
+    </a-marker>
+
+    <!-- markers that dont work that well -->
+    <a-marker id="image2" preset="pattern" type="pattern" url="markers/bowTarget.patt">
+      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#hotcold3" material="alphaTest:0.5" shadow></a-image>
+    </a-marker>
+    <a-marker id="image13" preset="pattern" type="pattern" url="markers/repeatTarget.patt">
+      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#hotcold6" material="alphaTest:0.5" shadow></a-image>
     </a-marker>
 
     <!-- animation files with marker
@@ -375,6 +393,8 @@
     var location4 = document.getElementById("map4location");
     var location5 = document.getElementById("map5location");
     var location6 = document.getElementById("map6location");
+    // need music piece when it is done!
+
 
     //These lines fix a scrolling problem.
     var fixed = document.getElementById('buttonChanger');
