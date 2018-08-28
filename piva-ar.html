@@ -256,9 +256,13 @@
   </div>
   <div class="hide" id="tempContinue">
     <div class="centerDiv">
-      This doesnt look pretty right now, but will. Continue Onward using the map!
+      <div class="content" id="contentId"></div>
+      <div class="inputHere" id="wordInput" contenteditable="true"></div>
     </div>
-    <div class="mapchecker" id="closer" onclick="closerFunction();">
+    <div class="mapchecker" id="pivaChecker" onclick="pivaCheckerFunction();">
+      click here to check
+    </div>
+    <div class="closer" id="closerId" onclick="closerFunction();">
       click here to close
     </div>
   </div>
@@ -460,9 +464,24 @@
     }
   }
   function closerFunction(){
-    window.location = "lloyd-ar.html";
+    if(document.getElementById('closerId').innerHTML == "Click here to continue!"){
+      window.location = "lloyd-ar.html";
+      room.components.sharedspace.send('*', {
+        type: 'continueToLloyd'
+      })
+    } else{
+      document.getElementById('tempContinue').classList.remove("overlay");
+      document.getElementById('tempContinue').classList.add("hide");
+    }
   }
-
+function pivaCheckerFunction(){
+  if(document.getElementById('wordInput').innerHTML == "piva" || document.getElementById('wordInput').innerHTML == "Piva" || document.getElementById('wordInput').innerHTML == "PIVA"){
+    document.getElementById('contentId').innerHTML = "Correct! Congrats";
+    document.getElementById('closerId').innerHTML = "Click here to continue!";
+  } else{
+    document.getElementById('contentId').innerHTML = "Try again:";
+  }
+}
     function loadMenus(){
       document.getElementById("changeThisClass1").classList.toggle("scannedhidden");
       document.getElementById("changeThisClass1").classList.toggle("scanned");
@@ -493,6 +512,7 @@
     lockMarker.addEventListener("click", function() {
      document.getElementById('tempContinue').classList.remove("hide");
      document.getElementById('tempContinue').classList.add("overlay");
+     document.getElementById('contentId').innerHTML = "Input your code here:";
      room.components.sharedspace.send('*', {
        type: 'continueToLloyd'
      })
@@ -520,6 +540,9 @@
       if (evt.detail.message.type === 'continueToLloyd') {
         document.getElementById("tempContinue").classList.remove("hide");
         document.getElementById("tempContinue").classList.add("overlay");
+        document.getElementById("contentId").innerHTML = "Someone unlocked the lock, click below to continue!";
+        document.getElementById("wordInput").classList.remove("hide");
+        document.getElementById("pivaChecker").classList.remove("hide");
       }
 
 
