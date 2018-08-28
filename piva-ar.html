@@ -254,7 +254,14 @@
       </div>
     </div>
   </div>
-
+  <div class="hide" id="tempContinue">
+    <div class="centerDiv">
+      This doesnt look pretty right now, but will. Continue Onward using the map!
+    </div>
+    <div class="mapchecker" id="closer" onclick="closerFunction();">
+      click here to close
+    </div>
+  </div>
   <a-scene vr-mode-ui="enabled: false" preloader embedded sharedspace avatars arjs='debugUIEnabled:false;'>
     <a-assets>
       <!-- map pieces -->
@@ -274,10 +281,10 @@
       <img id="hotcold7" src="img/WordClues_7.png" />
       <img id="hotcold8" src="img/WordClues_8.png" />
       <!-- PIVA -->
-      <img id="PIVA1" src="img/Letter_P.mov" />
-      <img id="PIVA2" src="img/Letter_I.mov" />
-      <img id="PIVA3" src="img/Letter_V.mov" />
-      <img id="PIVA4" src="img/Letter_A.mov" />
+      <img id="PIVA1" src="img/p.png" />
+      <img id="PIVA2" src="img/i.png" />
+      <img id="PIVA3" src="img/v.png" />
+      <img id="PIVA4" src="img/a.png" />
 
 
       <img id="puzzle1" src="img/YearConstruction.png" />
@@ -339,37 +346,40 @@
     <a-marker id="image12" preset="pattern" type="pattern" url="markers/quarterNoteTarget.patt">
       <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#hotcold8" material="alphaTest:0.5" shadow></a-image>
     </a-marker>
+
     <!-- PIVA -->
     <a-marker id="image8" preset="pattern" type="pattern" url="markers/primroseAlbum2Target.patt">
-      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#puzzle1" material="alphaTest:0.5" shadow></a-image>
+      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#piva1" material="alphaTest:0.5" shadow></a-image>
+    </a-marker>
+    <a-marker id="image9" preset="pattern" type="pattern" url="markers/primroseAlbum3Target.patt">
+      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#piva2" material="alphaTest:0.5" shadow></a-image>
+    </a-marker>
+    <a-marker id="image10" preset="pattern" type="pattern" url="markers/primrosePortraitTarget.patt">
+      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#piva3" material="alphaTest:0.5" shadow></a-image>
+    </a-marker>
+    <a-marker id="image15" preset="pattern" type="pattern" url="markers/viola1Target.patt">
+      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#piva4" material="alphaTest:0.5" shadow></a-image>
     </a-marker>
 
-
-
-    <a-marker id="image7" preset="pattern" type="pattern" url="markers/primroseAlbum1Target.patt">
+    <!-- Lock -->
+    <a-marker id="lockMarker" preset="pattern" type="pattern" url="markers/primroseAlbum1Target.patt">
       <a-entity gltf-model="#locked" position="0 0.25 0" rotation="-90 0 0" material="alphaTest:0.5" shadow animation-mixer></a-entity>
       <a-light type="point" color="#ffffff" position="0 9 -9"></a-light>
     </a-marker>
-    <a-marker id="image9" preset="pattern" type="pattern" url="markers/primroseAlbum3Target.patt">
-      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#puzzle1" material="alphaTest:0.5" shadow></a-image>
-    </a-marker>
-    <a-marker id="image10" preset="pattern" type="pattern" url="markers/primrosePortraitTarget.patt">
-      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#puzzle1" material="alphaTest:0.5" shadow></a-image>
-    </a-marker>
-    <a-marker id="image15" preset="pattern" type="pattern" url="markers/viola1Target.patt">
-      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#puzzle1" material="alphaTest:0.5" shadow></a-image>
-    </a-marker>
-    <a-marker id="image18" preset="pattern" type="pattern" url="markers/wholeNoteTarget.patt">
-      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#puzzle1" material="alphaTest:0.5" shadow></a-image>
-    </a-marker>
 
     <!-- markers that dont work that well -->
+
+    <!--
     <a-marker id="image2" preset="pattern" type="pattern" url="markers/bowTarget.patt">
       <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#hotcold3" material="alphaTest:0.5" shadow></a-image>
     </a-marker>
     <a-marker id="image13" preset="pattern" type="pattern" url="markers/repeatTarget.patt">
       <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#hotcold6" material="alphaTest:0.5" shadow></a-image>
     </a-marker>
+    <a-marker id="image18" preset="pattern" type="pattern" url="markers/wholeNoteTarget.patt">
+      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#puzzle1" material="alphaTest:0.5" shadow></a-image>
+    </a-marker>
+    -->
 
     <!-- animation files with marker
     <a-marker id="musicStandRejection" preset="pattern" type="pattern" url="lloyd.patt">
@@ -393,6 +403,7 @@
     var location4 = document.getElementById("map4location");
     var location5 = document.getElementById("map5location");
     var location6 = document.getElementById("map6location");
+    var lock = document.getElementById("lockMarker");
     // need music piece when it is done!
 
 
@@ -450,6 +461,9 @@
       })
     }
   }
+  function closerFunction(){
+    window.location = "lloyd-ar.html";
+  }
 
     function loadMenus(){
       document.getElementById("changeThisClass1").classList.toggle("scannedhidden");
@@ -478,6 +492,13 @@
         type: 'image1'
       })
     });
+    lockMarker.addEventListener("click", function() {
+     document.getElementById('tempContinue').classList.remove("hide");
+     document.getElementById('tempContinue').classList.add("overlay");
+     room.components.sharedspace.send('*', {
+       type: 'continueToLloyd'
+     })
+    });
 
     /*
     box2.addEventListener("click", function() {
@@ -498,6 +519,11 @@
         document.getElementById("prize2").classList.remove("hide");
         document.getElementById("prize2").classList.add("prize2");
       }
+      if (evt.detail.message.type === 'continueToLloyd') {
+        document.getElementById("tempContinue").classList.remove("hide");
+        document.getElementById("tempContinue").classList.add("overlay");
+      }
+
 
 
       /*
