@@ -2,13 +2,13 @@
 
 <head>
   <!-- these are for loading everything before the viewer is able to do anything. This results in longer loading times but fully functional activity while they are playing. (the next five lines. Jquery is really cool for other things too, as well as bootstrap, but dont worry too much about those. They are just files that allow the aframe-preloader-component.min.js)
-  -->
+  --><!--
   <script src="js/noback.js"></script>
   <link rel="stylesheet" href="https://cdn.rawgit.com/thomaspark/bootswatch/gh-pages/slate/bootstrap.min.css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   <script src="https://cdn.rawgit.com/gladeye/aframe-preloader-component/1.0.0/dist/aframe-preloader-component.min.js"></script>
-
+-->
   <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
   <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.0/aframe/build/aframe-ar.js"></script>
   <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v4.1.2/dist/aframe-extras.min.js"></script>
@@ -111,7 +111,14 @@
           display: inline-block;
           background-size: contain;
       }
-
+      .prize2{
+          width: 50px;
+          height: 50px;
+          margin: 10px;
+          background: url(img/fullFloorMap.png);
+          display: inline-block;
+          background-size: contain;
+      }
       .hide{
           display: none;
           transition: all 1s;
@@ -149,6 +156,60 @@
         background-color: silver;
         top: 67vh;
       }
+      .map1{
+        display: inline-block;
+        position: relative;
+        width: 30%;
+        background-image: url('img/papermap5.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        height: 40%;
+      }
+      .map2{
+        display: inline-block;
+        position: relative;
+        width: 30%;
+        background-image: url('img/papermap_topcenter.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        height: 40%;
+      }
+      .map3{
+        display: inline-block;
+        position: relative;
+        width: 30%;
+        background-image: url('img/papermap_topright.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        height: 40%;
+      }
+      .map4{
+        display: inline-block;
+        position: relative;
+        width: 30%;
+        background-image: url('img/papermap_bottomleft.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        height: 40%;
+      }
+      .map5{
+        display: inline-block;
+        position: relative;
+        width: 30%;
+        background-image: url('img/papermap_bottomcenter.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        height: 40%;
+      }
+      .map6{
+        display: inline-block;
+        position: relative;
+        width: 30%;
+        background-image: url('img/papermap_bottomright.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        height: 40%;
+      }
   </style>
 </head>
 
@@ -156,6 +217,7 @@
   <div class="scannedhidden" id="changeThisClass1">
     <div class="items">Things you have found:</div>
     <div class="hide" id="prize1"></div>
+    <div class="hide" id="prize2"></div>
   </div>
   <div class="hinthidden" id="changeThisClass2">
     <div class="items">
@@ -178,19 +240,143 @@
     </div>
   </div>
   -->
-
+  <div class="hide" id="redeemOverlay">
+    <div class="centerDiv">
+      Click to arrange the map pieces the way that they should be. <br />
+      <div class="map1" id="map1location" onclick="changeimage(this);"></div>
+      <div class="map1" id="map2location" onclick="changeimage(this);"></div>
+      <div class="map1" id="map3location" onclick="changeimage(this);"></div>
+      <div class="map1" id="map4location" onclick="changeimage(this);"></div>
+      <div class="map1" id="map5location" onclick="changeimage(this);"></div>
+      <div class="map1" id="map6location" onclick="changeimage(this);"></div>
+      <div class="mapchecker" id="mapchecker" onclick="mapcheckerfunction();">
+        Click here to see if the pattern is correct
+      </div>
+    </div>
+  </div>
+  <div class="hide" id="tempContinue">
+    <div class="centerDiv">
+      This doesnt look pretty right now, but will. Continue Onward using the map!
+    </div>
+    <div class="mapchecker" id="closer" onclick="closerFunction();">
+      click here to close
+    </div>
+  </div>
   <a-scene vr-mode-ui="enabled: false" preloader embedded sharedspace avatars arjs='debugUIEnabled:false;'>
     <a-assets>
-      <img id="puzzle1" src="img/placeholder.png" />
+      <!-- map pieces -->
+      <img id="mappiece1" src="img/floormap1.png" />
+      <img id="mappiece2" src="img/floormap2.png" />
+      <img id="mappiece3" src="img/floormap3.png" />
+      <img id="mappiece4" src="img/floormap4.png" />
+      <img id="mappiece5" src="img/floormap5.png" />
+      <img id="mappiece6" src="img/floormap6.png" />
+      <!-- word find hot-cold -->
+      <img id="hotcold1" src="img/WordClues_1.png" />
+      <img id="hotcold2" src="img/WordClues_2.png" />
+      <img id="hotcold3" src="img/WordClues_3.png" />
+      <img id="hotcold4" src="img/WordClues_4.png" />
+      <img id="hotcold5" src="img/WordClues_5.png" />
+      <img id="hotcold6" src="img/WordClues_6.png" />
+      <img id="hotcold7" src="img/WordClues_7.png" />
+      <img id="hotcold8" src="img/WordClues_8.png" />
+      <!-- PIVA -->
+      <img id="PIVA1" src="img/p.png" />
+      <img id="PIVA2" src="img/i.png" />
+      <img id="PIVA3" src="img/v.png" />
+      <img id="PIVA4" src="img/a.png" />
+
+      <!-- Music Stand -->
+      <a-asset-item id="musicStand" src="img/MusicStandRejection.gltf"></a-asset-item>
+
+      <!-- CLUES 2, 0, 1, 0 -->
+      <img id="lloyd1" src="img/Number2.png" />
+      <img id="lloyd2" src="img/Number0-1.png" />
+      <img id="lloyd3" src="img/Number1.jpg" />
+      <img id="lloyd4" src="img/Number0-2.png" />
+
+      <!-- Briefcase tag with clue -->
+      <img id="briefcaseClue" src="img/YearConstruction.png"/>
+
+      <!-- Concluding words and last goodbye -->
+      <img id="ending" src="img/MusicReturn.png"/>
+
+
+      <a-asset-item id="unlocked" src="img/lockUnlocked_01.gltf"></a-asset-item>
+      <a-asset-item id="locked" src="img/lock.gltf"></a-asset-item>
       <!-- this is what animation files will look like.
       <a-asset-item id="musicStand" src="img/MusicStandRejection.gltf"></a-asset-item>
-      -->
-
+    -->
     </a-assets>
 
-    <a-marker id="image1" preset="pattern" type="pattern" url="markers/mark1.patt">
-      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#puzzle1" material="alphaTest:0.5" shadow></a-image>
+    <!-- 2010 -->
+    <a-marker id="image16" preset="pattern" type="pattern" url="markers/bookTarget.patt">
+      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#lloyd1" material="alphaTest:0.5" shadow></a-image>
     </a-marker>
+    <a-marker id="image16" preset="pattern" type="pattern" url="markers/catTarget.patt">
+      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#lloyd2" material="alphaTest:0.5" shadow></a-image>
+    </a-marker>
+    <a-marker id="image16" preset="pattern" type="pattern" url="markers/cosmoTarget.patt">
+      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#lloyd3" material="alphaTest:0.5" shadow></a-image>
+    </a-marker>
+    <a-marker id="image16" preset="pattern" type="pattern" url="markers/keyTarget.patt">
+      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1" src="#lloyd4" material="alphaTest:0.5" shadow></a-image>
+    </a-marker>
+
+    <!--Year of Construction on the briefcase -->
+    <a-marker id="image16" preset="pattern" type="pattern" url="markers/musicstandTarget.patt">
+      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#briefcaseClue" material="alphaTest:0.5" shadow></a-image>
+    </a-marker>
+
+    <!-- Music Stand Rejection -->
+    <a-marker id="musicStandRejection" preset="pattern" type="pattern" url="markers/treasuremapTarget.patt">
+      <a-entity gltf-model="#musicStand" position="0 1 1" rotation="-90 0 0" material="alphaTest:0.5" shadow animation-mixer></a-entity>
+      <a-light type="point" color="#FFEA86" position="0 0 -9"></a-light>
+    </a-marker>
+
+    <!-- MusicReturn -->
+    <a-marker id="image16" preset="pattern" type="pattern" url="markers/typewriterTarget.patt">
+      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#ending" material="alphaTest:0.5" shadow></a-image>
+    </a-marker>
+
+
+    <!-- gives the player the map -->
+    <a-marker id="mapRedeemMarker" preset="pattern" type="pattern" url="markers/cauldronTarget.patt">
+      <a-image position="0 .25 0" rotation="-90 0 0" width="1" height="1" src="#puzzle1" material="alphaTest:0.5" shadow></a-image>
+    </a-marker>
+
+    <!-- Word Clues -->
+    <a-marker id="image16" preset="pattern" type="pattern" url="markers/viola2Target.patt">
+      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#hotcold1" material="alphaTest:0.5" shadow></a-image>
+    </a-marker>
+    <a-marker id="image6" preset="pattern" type="pattern" url="markers/HBLeeTarget.patt">
+      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#hotcold3" material="alphaTest:0.5" shadow></a-image>
+    </a-marker>
+    <a-marker id="image3" preset="pattern" type="pattern" url="markers/eighthNoteTarget.patt">
+      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#hotcold4" material="alphaTest:0.5" shadow></a-image>
+    </a-marker>
+    <a-marker id="image1" preset="pattern" type="pattern" url="markers/bassClefTarget.patt">
+      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#hotcold5" material="alphaTest:0.5" shadow></a-image>
+    </a-marker>
+    <a-marker id="image4" preset="pattern" type="pattern" url="markers/ghostTarget.patt">
+      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#hotcold6" material="alphaTest:0.5" shadow></a-image>
+    </a-marker>
+    <a-marker id="image14" preset="pattern" type="pattern" url="markers/trebleTarget.patt">
+      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#hotcold7" material="alphaTest:0.5" shadow></a-image>
+    </a-marker>
+    <a-marker id="image12" preset="pattern" type="pattern" url="markers/quarterNoteTarget.patt">
+      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#hotcold8" material="alphaTest:0.5" shadow></a-image>
+    </a-marker>
+
+    <a-marker id="image15" preset="pattern" type="pattern" url="markers/viola1Target.patt">
+      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#piva4" material="alphaTest:0.5" shadow></a-image>
+    </a-marker>
+
+
+
+    <!-- markers that dont work that well -->
+
+
     <!-- animation files with marker
     <a-marker id="musicStandRejection" preset="pattern" type="pattern" url="lloyd.patt">
       <a-entity gltf-model="#musicStand" position="0 1 1" rotation="-90 0 0" material="alphaTest:0.5" shadow animation-mixer></a-entity>
@@ -205,7 +391,9 @@
     var currentUrl = new URL(window.location);
     var roomName = currentUrl.search.substr(1);
     var room = document.querySelector('[sharedspace]');
-    var box1 = document.querySelector('#image1');
+    var  box1 = document.querySelector('#image1');
+    // need music piece when it is done!
+
 
     //These lines fix a scrolling problem.
     var fixed = document.getElementById('buttonChanger');
@@ -239,7 +427,8 @@
       document.getElementById("overlayID").classList.add("hide");
     }
 
-    box1.addEventListener("click", function() {
+
+     box1.addEventListener("click", function() {
       //document.getElementById('overlayID').classList.remove("hide");
       //document.getElementById('overlayID').classList.add("overlay");
       document.getElementById("prize1").classList.toggle("hide");
@@ -260,10 +449,8 @@
     */
 
     room.addEventListener('participantmessage', function(evt) {
-      if (evt.detail.message.type === 'image1') {
-        document.getElementById("prize1").classList.remove("hide");
-        document.getElementById("prize1").classList.add("prize1");
-      }
+
+
 
       /*
       if (evt.detail.message.type === 'image2') {
