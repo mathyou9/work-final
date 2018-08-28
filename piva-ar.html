@@ -427,61 +427,64 @@
       }
     }
 */
-  function changeimage(el){
-    if(el.className == "map1"){
-        el.classList.remove("map1");
-        el.classList.add("map2");
+    function changeimage(el){
+      if(el.className == "map1"){
+          el.classList.remove("map1");
+          el.classList.add("map2");
+      }
+      else if(el.className == "map2"){
+        el.classList.remove("map2");
+        el.classList.add("map3");
+      }
+      else if(el.className == "map3"){
+        el.classList.remove("map3");
+        el.classList.add("map4");
+      }
+      else if(el.className == "map4"){
+        el.classList.remove("map4");
+        el.classList.add("map5");
+      }
+      else if(el.className == "map5"){
+        el.classList.remove("map5");
+        el.classList.add("map6");
+      }
+      else if(el.className == "map6"){
+        el.classList.remove("map6");
+        el.classList.add("map1");
+      }
     }
-    else if(el.className == "map2"){
-      el.classList.remove("map2");
-      el.classList.add("map3");
-    }
-    else if(el.className == "map3"){
-      el.classList.remove("map3");
-      el.classList.add("map4");
-    }
-    else if(el.className == "map4"){
-      el.classList.remove("map4");
-      el.classList.add("map5");
-    }
-    else if(el.className == "map5"){
-      el.classList.remove("map5");
-      el.classList.add("map6");
-    }
-    else if(el.className == "map6"){
-      el.classList.remove("map6");
-      el.classList.add("map1");
-    }
-  }
 
-  function mapcheckerfunction(){
-    if(location1.className == "map1" && location2.className == "map2" && location3.className == "map3" && location4.className == "map4" && location5.className == "map5" && location6.className == "map6"){
-      document.getElementById("prize2").classList.remove("hide");
-      document.getElementById("prize2").classList.add("prize2");
-      room.components.sharedspace.send('*', {
-        type: 'map'
-      })
+    function mapcheckerfunction(){
+      if(location1.className == "map1" && location2.className == "map2" && location3.className == "map3" && location4.className == "map4" && location5.className == "map5" && location6.className == "map6"){
+        document.getElementById("prize2").classList.remove("hide");
+        document.getElementById("prize2").classList.add("prize2");
+        room.components.sharedspace.send('*', {
+          type: 'map'
+        })
+      }
     }
-  }
-  function closerFunction(){
-    if(document.getElementById('closerId').innerHTML == "Click here to continue!"){
-      window.location = "lloyd-ar.html";
+    function closerFunction(){
+      if(document.getElementById('closerId').innerHTML == "Click here to continue!"){
+        window.location = "lloyd-ar.html";
+        room.components.sharedspace.send('*', {
+          type: 'continueToLloyd'
+        })
+      } else{
+        document.getElementById('tempContinue').classList.remove("overlay");
+        document.getElementById('tempContinue').classList.add("hide");
+      }
+    }
+    function pivaCheckerFunction(){
+    if(document.getElementById('wordInput').innerHTML == "piva" || document.getElementById('wordInput').innerHTML == "Piva" || document.getElementById('wordInput').innerHTML == "PIVA"){
+      document.getElementById('contentId').innerHTML = "Correct! Congrats";
+      document.getElementById('closerId').innerHTML = "Click here to continue!";
       room.components.sharedspace.send('*', {
         type: 'continueToLloyd'
       })
     } else{
-      document.getElementById('tempContinue').classList.remove("overlay");
-      document.getElementById('tempContinue').classList.add("hide");
+      document.getElementById('contentId').innerHTML = "Try again:";
     }
   }
-function pivaCheckerFunction(){
-  if(document.getElementById('wordInput').innerHTML == "piva" || document.getElementById('wordInput').innerHTML == "Piva" || document.getElementById('wordInput').innerHTML == "PIVA"){
-    document.getElementById('contentId').innerHTML = "Correct! Congrats";
-    document.getElementById('closerId').innerHTML = "Click here to continue!";
-  } else{
-    document.getElementById('contentId').innerHTML = "Try again:";
-  }
-}
     function loadMenus(){
       document.getElementById("changeThisClass1").classList.toggle("scannedhidden");
       document.getElementById("changeThisClass1").classList.toggle("scanned");
@@ -489,7 +492,6 @@ function pivaCheckerFunction(){
       document.getElementById("changeThisClass2").classList.toggle("hints");
 
     }
-
     function overlayRemove(){
       document.getElementById("overlayID").classList.remove("overlay");
       document.getElementById("overlayID").classList.add("hide");
@@ -513,9 +515,6 @@ function pivaCheckerFunction(){
      document.getElementById('tempContinue').classList.remove("hide");
      document.getElementById('tempContinue').classList.add("overlay");
      document.getElementById('contentId').innerHTML = "Input your code here:";
-     room.components.sharedspace.send('*', {
-       type: 'continueToLloyd'
-     })
     });
 
     /*
