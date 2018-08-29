@@ -370,7 +370,6 @@
     </a-marker>
 
     <!-- markers that dont work that well -->
-
     <!--
     <a-marker id="image2" preset="pattern" type="pattern" url="markers/bowTarget.patt">
       <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#hotcold3" material="alphaTest:0.5" shadow></a-image>
@@ -397,7 +396,7 @@
     var currentUrl = new URL(window.location);
     var roomName = currentUrl.search.substr(1);
     var room = document.querySelector('[sharedspace]');
-    var  box1 = document.querySelector('#image1');
+    var box1 = document.querySelector('#image1');
     var mapRedeem = document.querySelector('#mapRedeemMarker');
     var location1 = document.getElementById("map1location");
     var location2 = document.getElementById("map2location");
@@ -463,6 +462,7 @@
         })
       }
     }
+
     function closerFunction(){
       if(document.getElementById('closerId').innerHTML == "Click here to continue!"){
         window.location = "lloyd-ar.html";
@@ -474,17 +474,19 @@
         document.getElementById('tempContinue').classList.add("hide");
       }
     }
+
     function pivaCheckerFunction(){
-    if(document.getElementById('wordInput').innerHTML == "piva" || document.getElementById('wordInput').innerHTML == "Piva" || document.getElementById('wordInput').innerHTML == "PIVA"){
-      document.getElementById('contentId').innerHTML = "Correct! Congrats";
-      document.getElementById('closerId').innerHTML = "Click here to continue!";
-      room.components.sharedspace.send('*', {
-        type: 'continueToLloyd'
-      })
-    } else{
-      document.getElementById('contentId').innerHTML = "Try again:";
+      if(document.getElementById('wordInput').innerHTML == "piva" || document.getElementById('wordInput').innerHTML == "Piva" || document.getElementById('wordInput').innerHTML == "PIVA"){
+        document.getElementById('contentId').innerHTML = "Correct! Congrats";
+        document.getElementById('closerId').innerHTML = "Click here to continue!";
+        room.components.sharedspace.send('*', {
+          type: 'continueToLloyd'
+        })
+      } else{
+        document.getElementById('contentId').innerHTML = "Try again:";
+      }
     }
-  }
+
     function loadMenus(){
       document.getElementById("changeThisClass1").classList.toggle("scannedhidden");
       document.getElementById("changeThisClass1").classList.toggle("scanned");
@@ -492,6 +494,7 @@
       document.getElementById("changeThisClass2").classList.toggle("hints");
 
     }
+
     function overlayRemove(){
       document.getElementById("overlayID").classList.remove("overlay");
       document.getElementById("overlayID").classList.add("hide");
@@ -502,7 +505,7 @@
       document.getElementById('redeemOverlay').classList.add("overlay");
     });
 
-     box1.addEventListener("click", function() {
+    box1.addEventListener("click", function() {
       //document.getElementById('overlayID').classList.remove("hide");
       //document.getElementById('overlayID').classList.add("overlay");
       document.getElementById("prize1").classList.toggle("hide");
@@ -511,10 +514,11 @@
         type: 'image1'
       })
     });
+
     lockMarker.addEventListener("click", function() {
-     document.getElementById('tempContinue').classList.remove("hide");
-     document.getElementById('tempContinue').classList.add("overlay");
-     document.getElementById('contentId').innerHTML = "Input your code here:";
+      document.getElementById('tempContinue').classList.remove("hide");
+      document.getElementById('tempContinue').classList.add("overlay");
+      document.getElementById('contentId').innerHTML = "Input your code here:";
     });
 
     /*
@@ -536,6 +540,7 @@
         document.getElementById("prize2").classList.remove("hide");
         document.getElementById("prize2").classList.add("prize2");
       }
+      /*
       if (evt.detail.message.type === 'continueToLloyd') {
         document.getElementById("tempContinue").classList.remove("hide");
         document.getElementById("tempContinue").classList.add("overlay");
@@ -544,9 +549,7 @@
         document.getElementById("pivaChecker").classList.remove("hide");
         document.getElementById("closerId").innerHTML = "Click here to continue!";
       }
-
-
-
+      */
       /*
       if (evt.detail.message.type === 'image2') {
         document.getElementById("prize2").classList.toggle("hide");
@@ -555,10 +558,7 @@
       */
 
     });
-    room.setAttribute('sharedspace', {
-      room: roomName,
-      hold: false
-    });
+    room.setAttribute('sharedspace', {room: 101, hold: false});
   </script>
 </body>
 
