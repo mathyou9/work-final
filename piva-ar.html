@@ -252,6 +252,9 @@
       <div class="mapchecker" id="mapchecker" onclick="mapcheckerfunction();">
         Click here to see if the pattern is correct
       </div>
+      <div class="mapCloser" id="mapCloser" onclick="redeemOverlayCloser();">
+        Click here to close
+      </div>
     </div>
   </div>
   <div class="hide" id="tempContinue">
@@ -289,6 +292,8 @@
       <img id="PIVA2" src="img/i.png" />
       <img id="PIVA3" src="img/v.png" />
       <img id="PIVA4" src="img/a.png" />
+      <!-- Hold On -->
+      <img id="hold" src="img/waitHold.png" />
 
 
 
@@ -320,7 +325,7 @@
     </a-marker>
     <!-- gives the player the map -->
     <a-marker id="mapRedeemMarker" preset="pattern" type="pattern" url="markers/cauldronTarget.patt">
-      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#puzzle1" material="alphaTest:0.5" shadow></a-image>
+      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#hold" material="alphaTest:0.5" shadow></a-image>
     </a-marker>
 
     <!-- Word Clues -->
@@ -405,6 +410,8 @@
     var location5 = document.getElementById("map5location");
     var location6 = document.getElementById("map6location");
     var lock = document.getElementById("lockMarker");
+    var prize2 = document.getElementById("prize2");
+    var redeemOverlay = document.getElementById("redeemOverlay");
     // need music piece when it is done!
 
 
@@ -500,6 +507,11 @@
       document.getElementById("overlayID").classList.add("hide");
     }
 
+    function redeemOverlayCloser(){
+      redeemOverlay.classList.remove("overlay");
+      redeemOverlay.classList.add("hide");
+    }
+
     mapRedeem.addEventListener("click", function(){
       document.getElementById('redeemOverlay').classList.remove("hide");
       document.getElementById('redeemOverlay').classList.add("overlay");
@@ -518,7 +530,12 @@
     lockMarker.addEventListener("click", function() {
       document.getElementById('tempContinue').classList.remove("hide");
       document.getElementById('tempContinue').classList.add("overlay");
-      document.getElementById('contentId').innerHTML = "Input your code here:";
+      if(prize2.className == "hide"){
+        document.getElementById('contentId').innerHTML = "Sorry, you need to find the map first!";
+        document.getElementById('pivaChecker').innerHTML = "";
+      } else{
+        document.getElementById('contentId').innerHTML = "Input your code here:";
+      }
     });
 
     /*
@@ -540,7 +557,6 @@
         document.getElementById("prize2").classList.remove("hide");
         document.getElementById("prize2").classList.add("prize2");
       }
-      /*
       if (evt.detail.message.type === 'continueToLloyd') {
         document.getElementById("tempContinue").classList.remove("hide");
         document.getElementById("tempContinue").classList.add("overlay");
@@ -549,7 +565,6 @@
         document.getElementById("pivaChecker").classList.remove("hide");
         document.getElementById("closerId").innerHTML = "Click here to continue!";
       }
-      */
       /*
       if (evt.detail.message.type === 'image2') {
         document.getElementById("prize2").classList.toggle("hide");
