@@ -472,7 +472,7 @@
 
     function closerFunction(){
       if(document.getElementById('closerId').innerHTML == "Click here to continue!"){
-        window.location = "lloyd-ar.html";
+        window.location = "map.html";
         room.components.sharedspace.send('*', {
           type: 'continueToLloyd'
         })
@@ -535,6 +535,7 @@
         document.getElementById('pivaChecker').style.display = "none";
       } else{
         document.getElementById('contentId').innerHTML = "Input your code here:";
+        document.getElementById('contentId').style.display = "block";
       }
     });
 
