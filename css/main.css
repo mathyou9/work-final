@@ -38,3 +38,10 @@ body{
   top: 10vw;
   left: 5vw;
 }
+.congrats{
+  width: 70%;
+  position: relative;
+  display: block;
+  text-align: center;
+  left: 15%
+}
