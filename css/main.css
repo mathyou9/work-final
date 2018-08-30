@@ -29,3 +29,12 @@ body{
   background-color: rgba(50,50,50,1);
   color: white;
 }
+.fullMap{
+  width: 90vw;
+  height: 70vw;
+  position: relative;
+  display: block;
+  text-align: center;
+  top: 10vw;
+  left: 5vw;
+}
