@@ -112,12 +112,13 @@
           background-size: contain;
       }
       .prize2{
-          width: 50px;
-          height: 50px;
+          width: 100px;
+          height: 110px;
           margin: 10px;
           background: url(img/fullFloorMap.png);
           display: inline-block;
           background-size: contain;
+          background-repeat: no-repeat;
       }
       .hide{
           display: none;
@@ -134,11 +135,13 @@
         z-index: 50;
         width: 80%;
         height: 80%;
-        background-color: rgba(10,10,10,.8);
+        background-color: rgba(10,10,10,.9);
         color: white;
         left: 10%;
         top: 4%;
         text-align: center;
+        border-radius: 5vw;
+        padding-top: 10vw;
       }
       .centerDiv{
         width: 80%;
@@ -159,56 +162,56 @@
       .map1{
         display: inline-block;
         position: relative;
-        width: 30%;
+        width: 20vw;
         background-image: url('img/papermap5.png');
         background-size: contain;
         background-repeat: no-repeat;
-        height: 40%;
+        height: 16vw;
       }
       .map2{
         display: inline-block;
         position: relative;
-        width: 30%;
+        width: 20vw;
         background-image: url('img/papermap_topcenter.png');
         background-size: contain;
         background-repeat: no-repeat;
-        height: 40%;
+        height: 16vw;
       }
       .map3{
         display: inline-block;
         position: relative;
-        width: 30%;
+        width: 20vw;
         background-image: url('img/papermap_topright.png');
         background-size: contain;
         background-repeat: no-repeat;
-        height: 40%;
+        height: 16vw;
       }
       .map4{
         display: inline-block;
         position: relative;
-        width: 30%;
+        width: 20vw;
         background-image: url('img/papermap_bottomleft.png');
         background-size: contain;
         background-repeat: no-repeat;
-        height: 40%;
+        height: 16vw;
       }
       .map5{
         display: inline-block;
         position: relative;
-        width: 30%;
+        width: 20vw;
         background-image: url('img/papermap_bottomcenter.png');
         background-size: contain;
         background-repeat: no-repeat;
-        height: 40%;
+        height: 16vw;
       }
       .map6{
         display: inline-block;
         position: relative;
-        width: 30%;
+        width: 20vw;
         background-image: url('img/papermap_bottomright.png');
         background-size: contain;
         background-repeat: no-repeat;
-        height: 40%;
+        height: 16vw;
       }
   </style>
 </head>
@@ -222,6 +225,7 @@
   <div class="hinthidden" id="changeThisClass2">
     <div class="items">
       Hints:
+      <div class="hintsclass" id="hintsid"></div>
     </div>
   </div>
   <div class="buttonChanger" id="buttonChanger" onclick="loadMenus();">
@@ -242,7 +246,7 @@
   -->
   <div class="hide" id="redeemOverlay">
     <div class="centerDiv">
-      Click to arrange the map pieces the way that they should be. <br />
+      Click to arrange the map pieces the way that they should be. <br /><br /><br />
       <div class="map1" id="map1location" onclick="changeimage(this);"></div>
       <div class="map1" id="map2location" onclick="changeimage(this);"></div>
       <div class="map1" id="map3location" onclick="changeimage(this);"></div>
@@ -410,8 +414,18 @@
     var location5 = document.getElementById("map5location");
     var location6 = document.getElementById("map6location");
     var lock = document.getElementById("lockMarker");
+    var prize1 = document.getElementById("prize1");
     var prize2 = document.getElementById("prize2");
     var redeemOverlay = document.getElementById("redeemOverlay");
+    var tempContinue = document.getElementById("tempContinue");
+    var contentId = document.getElementById("contentId");
+    var pivaChecker = document.getElementById("pivaChecker");
+    var wordInput = document.getElementById("wordInput");
+    var closerId = document.getElementById("closerId");
+    var changeThisClass1 = document.getElementById("changeThisClass1");
+    var changeThisClass2 = document.getElementById("changeThisClass2");
+    var overlayID = document.getElementById("overlayID");
+    var hintsId = document.getElementById("hintsid");
     // need music piece when it is done!
 
 
@@ -462,8 +476,8 @@
 
     function mapcheckerfunction(){
       if(location1.className == "map1" && location2.className == "map2" && location3.className == "map3" && location4.className == "map4" && location5.className == "map5" && location6.className == "map6"){
-        document.getElementById("prize2").classList.remove("hide");
-        document.getElementById("prize2").classList.add("prize2");
+        prize2.classList.remove("hide");
+        prize2.classList.add("prize2");
         room.components.sharedspace.send('*', {
           type: 'map'
         })
@@ -477,34 +491,34 @@
           type: 'continueToLloyd'
         })
       } else{
-        document.getElementById('tempContinue').classList.remove("overlay");
-        document.getElementById('tempContinue').classList.add("hide");
+        tempContinue.classList.remove("overlay");
+        tempContinue.classList.add("hide");
       }
     }
 
     function pivaCheckerFunction(){
-      if(document.getElementById('wordInput').innerHTML == "piva" || document.getElementById('wordInput').innerHTML == "Piva" || document.getElementById('wordInput').innerHTML == "PIVA"){
-        document.getElementById('contentId').innerHTML = "Correct! Congrats";
-        document.getElementById('closerId').innerHTML = "Click here to continue!";
+      if(wordInput.innerHTML == "piva" || wordInput.innerHTML == "Piva" || wordInput.innerHTML == "PIVA"){
+        contentId.innerHTML = "Correct! Congrats";
+        closerId.innerHTML = "Click here to continue!";
         room.components.sharedspace.send('*', {
           type: 'continueToLloyd'
         })
       } else{
-        document.getElementById('contentId').innerHTML = "Try again:";
+        contentId.innerHTML = "Try again:";
       }
     }
 
     function loadMenus(){
-      document.getElementById("changeThisClass1").classList.toggle("scannedhidden");
-      document.getElementById("changeThisClass1").classList.toggle("scanned");
-      document.getElementById("changeThisClass2").classList.toggle("hinthidden");
-      document.getElementById("changeThisClass2").classList.toggle("hints");
+      changeThisClass1.classList.toggle("scannedhidden");
+      changeThisClass1.classList.toggle("scanned");
+      changeThisClass2.classList.toggle("hinthidden");
+      changeThisClass2.classList.toggle("hints");
 
     }
 
     function overlayRemove(){
-      document.getElementById("overlayID").classList.remove("overlay");
-      document.getElementById("overlayID").classList.add("hide");
+      overlayID.classList.remove("overlay");
+      overlayID.classList.add("hide");
     }
 
     function redeemOverlayCloser(){
@@ -513,29 +527,29 @@
     }
 
     mapRedeem.addEventListener("click", function(){
-      document.getElementById('redeemOverlay').classList.remove("hide");
-      document.getElementById('redeemOverlay').classList.add("overlay");
+      redeemOverlay.classList.remove("hide");
+      redeemOverlay.classList.add("overlay");
     });
 
     box1.addEventListener("click", function() {
       //document.getElementById('overlayID').classList.remove("hide");
       //document.getElementById('overlayID').classList.add("overlay");
-      document.getElementById("prize1").classList.toggle("hide");
-      document.getElementById("prize1").classList.toggle("prize1");
+      prize1.classList.toggle("hide");
+      prize1.classList.toggle("prize1");
       room.components.sharedspace.send('*', {
         type: 'image1'
       })
     });
 
     lockMarker.addEventListener("click", function() {
-      document.getElementById('tempContinue').classList.remove("hide");
-      document.getElementById('tempContinue').classList.add("overlay");
+      tempContinue.classList.remove("hide");
+      tempContinue.classList.add("overlay");
       if(prize2.className == "hide"){
-        document.getElementById('contentId').innerHTML = "Sorry, you need to find the map first!";
-        document.getElementById('pivaChecker').style.display = "none";
+        contentId.innerHTML = "Sorry, you need to find the music and the map first! <br />How else would you know where to go?";
+        pivaChecker.style.display = "none";
       } else{
-        document.getElementById('contentId').innerHTML = "Input your code here:";
-        document.getElementById('contentId').style.display = "block";
+        contentId.innerHTML = "Input your code here:";
+        contentId.style.display = "block";
       }
     });
 
@@ -551,20 +565,27 @@
 
     room.addEventListener('participantmessage', function(evt) {
       if (evt.detail.message.type === 'image1') {
-        document.getElementById("prize1").classList.remove("hide");
-        document.getElementById("prize1").classList.add("prize1");
+        prize1.classList.remove("hide");
+        prize1.classList.add("prize1");
       }
       if (evt.detail.message.type === 'map') {
-        document.getElementById("prize2").classList.remove("hide");
-        document.getElementById("prize2").classList.add("prize2");
+        prize2.classList.remove("hide");
+        prize2.classList.add("prize2");
       }
       if (evt.detail.message.type === 'continueToLloyd') {
-        document.getElementById("tempContinue").classList.remove("hide");
-        document.getElementById("tempContinue").classList.add("overlay");
-        document.getElementById("contentId").innerHTML = "Someone unlocked the lock, click below to continue!";
-        document.getElementById("wordInput").classList.remove("hide");
-        document.getElementById("pivaChecker").classList.remove("hide");
-        document.getElementById("closerId").innerHTML = "Click here to continue!";
+        tempContinue.classList.remove("hide");
+        tempContinue.classList.add("overlay");
+        contentId.innerHTML = "Someone unlocked the lock, click below to continue!";
+        wordInput.classList.remove("hide");
+        pivaChecker.classList.remove("hide");
+        closerId.innerHTML = "Click here to continue!";
+      }
+      if (evt.detail.message.type === 'hint1'){
+        if(hintsId.innerHTML == ""){
+          hintsId.innerHTML = hintsId.innerHTML + evt.detail.message.mainmessage;
+        } else{
+          hintsId.innerHTML = hintsId.innerHTML + "<br />" + evt.detail.message.mainmessage;
+        }
       }
       /*
       if (evt.detail.message.type === 'image2') {

@@ -1,0 +1,58 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
+    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.0/aframe/build/aframe-ar.js"></script>
+    <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v4.1.2/dist/aframe-extras.min.js"></script>
+    <script src="https://unpkg.com/aframe-sharedspace-component@1.0.1/dist/aframe-sharedspace-component.min.js"></script>
+
+    <link rel="stylesheet" href="css/help.css" type="text/css" />
+  </head>
+  <body>
+    <div class="piva">
+      completed:
+      <div class="completed">
+        <div class="puzzle1" id="puzzle1"></div>
+      </div>
+      Send hint:
+      <div class="customHint" id="customHint" contenteditable="true"></div>
+      <div class="send" id="send" onclick="sendHint();">
+        send
+      </div>
+      Sent hints:
+      <div class="sent" id="sent"></div>
+    </div>
+    <div class="lloyd">
+
+    </div>
+    <a-scene vr-mode-ui="enabled: false" preloader embedded sharedspace avatars arjs='debugUIEnabled:false;'>
+
+    </a-scene>
+    <script>
+      var currentUrl = new URL(window.location);
+      var roomName = currentUrl.search.substr(1);
+      var room = document.querySelector('[sharedspace]');
+
+      var sent = document.getElementById("sent");
+      var customHint = document.getElementById("customHint");
+
+
+      function sendHint(){
+        if(sent.innerHTML == ""){
+          sent.innerHTML = sent.innerHTML + customHint.innerHTML;
+        }
+        else{
+          sent.innerHTML = sent.innerHTML + "<br />" + customHint.innerHTML;
+        }
+        room.components.sharedspace.send('*', {
+          type: 'hint1',
+          mainmessage: customHint.innerHTML
+        })
+      }
+
+      room.addEventListener('participantmessage', function(evt) {
+
+      });
+      room.setAttribute('sharedspace', {room: 101, hold: false});
+    </script>
+  </body>
+</html>
