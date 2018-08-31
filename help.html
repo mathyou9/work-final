@@ -8,6 +8,12 @@
     <link rel="stylesheet" href="css/help.css" type="text/css" />
   </head>
   <body>
+
+    <a-scene vr-mode-ui="enabled: false" preloader embedded sharedspace avatars arjs='debugUIEnabled:false;'>
+      <a-entity camera>
+        <a-entity cursor="rayOrigin: mouse;"></a-entity>
+      </a-entity>
+    </a-scene>
     <div class="piva">
       completed:
       <div class="completed">
@@ -24,9 +30,6 @@
     <div class="lloyd">
 
     </div>
-    <a-scene vr-mode-ui="enabled: false" preloader embedded sharedspace avatars arjs='debugUIEnabled:false;'>
-
-    </a-scene>
     <script>
       var currentUrl = new URL(window.location);
       var roomName = currentUrl.search.substr(1);

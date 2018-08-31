@@ -1,0 +1,10 @@
+.piva{
+    position: fixed;
+    display: inline-block;
+    width: 100%;
+    background-color: white;
+    height: 100%;
+    right: 0px;
+    top: 0px;
+    text-align: center;
+}
