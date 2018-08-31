@@ -8,3 +8,28 @@
     top: 0px;
     text-align: center;
 }
+.lloyd{
+    position: fixed;
+    display: inline-block;
+    width: 100%;
+    background-color: white;
+    height: 100%;
+    right: 0px;
+    top: 50%;
+    text-align: center;
+}
+.completed{
+  text-align: center;
+  position: relative;
+  width: 100%;
+}
+.puzzle1{
+  background-image: url("/img/fullFloorMap.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 100px;
+  height: 100px;
+}
+.hide{
+  display: none;
+}

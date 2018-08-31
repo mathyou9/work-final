@@ -213,6 +213,18 @@
         background-repeat: no-repeat;
         height: 16vw;
       }
+      .checkmark{
+        position: fixed;
+        height: 40vw;
+        width: 40vw;
+        display: block;
+        background-image: url("/img/Correct_Check.svg");
+        background-size: contain;
+        background-repeat: no-repeat;
+        z-index: 100;
+        left: 35vw;
+        top: 15vh;
+      }
   </style>
 </head>
 
@@ -245,6 +257,7 @@
   </div>
   -->
   <div class="hide" id="redeemOverlay">
+    <div class="hide" id="checkmark"></div>
     <div class="centerDiv">
       Click to arrange the map pieces the way that they should be. <br /><br /><br />
       <div class="map1" id="map1location" onclick="changeimage(this);"></div>
@@ -426,6 +439,7 @@
     var changeThisClass2 = document.getElementById("changeThisClass2");
     var overlayID = document.getElementById("overlayID");
     var hintsId = document.getElementById("hintsid");
+    var checkmark = document.getElementById("checkmark");
     // need music piece when it is done!
 
 
@@ -478,6 +492,8 @@
       if(location1.className == "map1" && location2.className == "map2" && location3.className == "map3" && location4.className == "map4" && location5.className == "map5" && location6.className == "map6"){
         prize2.classList.remove("hide");
         prize2.classList.add("prize2");
+        checkmark.classList.add("checkmark");
+        checkmark.classList.remove("hide");
         room.components.sharedspace.send('*', {
           type: 'map'
         })
