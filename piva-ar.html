@@ -24,12 +24,10 @@
 
   <style>
       /*
-
       in stylesheets /* start comments and * / without comments ends them.
       stylesheets are written in css. css is important for creating the look of HTML. HTML is the content, CSS is the visual side, and Javascript is the functionality.
       css should always be written in here. It is possible to write it inline with other code throughout the HTML, but really bad practice and bad organization. KEEP IT UP HERE!
       To use css use class="classname" (classname being any name you want) in the HTML then to change what you want that element to look like by typing .classname{} inside the curly brackets type different parameters you would like to change. common ones are width, height, position, display, opacity, background-color, background-image, text-align, left, right, and many more. After you decide what you want to change just put a colon and what you want to change it to. Such as... .name{width: 50%;}
-
       */
 
       body{
@@ -225,6 +223,11 @@
         left: 35vw;
         top: 15vh;
       }
+      .timer{
+        position: fixed;
+        left: 0px;
+        top: 0px;
+      }
   </style>
 </head>
 
@@ -242,6 +245,7 @@
   </div>
   <div class="buttonChanger" id="buttonChanger" onclick="loadMenus();">
   </div>
+  <div class="timer" id="timer"></div>
   <!--
   <div class="hide" id="overlayID">
     <div class="centerDiv">
@@ -441,6 +445,34 @@
     var hintsId = document.getElementById("hintsid");
     var checkmark = document.getElementById("checkmark");
     // need music piece when it is done!
+
+
+    //Timer
+    var sm = 25;
+    var ss = 60;
+    var thenDate = new Date();
+    var sNow = thenDate.getSeconds();
+    var sThen;
+    var setSecondTime = setInterval(timerGoing, 1000);
+    function startTime(){
+      var thenDate2 = new Date();
+      sNow = thenDate2.getSeconds();
+      sm = 25;
+      ss = 60;
+    }
+    function timerGoing(){
+      var nowDate = new Date();
+      sThen = nowDate.getSeconds();
+      ss = 60 - (sThen - sNow);
+      if(ss > 59){
+        ss = ss - 60;
+      }
+      if(ss > 58){
+        sm = sm - 1;
+      }
+      document.getElementById("timer").innerHTML = sm + " : " + ss;
+    }
+
 
 
     //These lines fix a scrolling problem.

@@ -1,0 +1,45 @@
+<html>
+  <head>
+
+  </head>
+  <body>
+
+    <div class="timer" id="timer"></div>
+    <div class="button" id="buttonStart" onclick="startTime();">
+      click here to start the timer
+    </div>
+    <div class="timer" id="accTimer"></div>
+    <script>
+      var m = 25;
+      var s = 0;
+      var sm = 25;
+      var ss = 60;
+      var thenDate = new Date();
+      var sNow = thenDate.getSeconds();
+      var sThen;
+      var setSecondTime = setInterval(timerGoing, 1000);
+      function startTime(){
+        var thenDate2 = new Date();
+        sNow = thenDate2.getSeconds();
+        m = 25;
+        s = 0;
+        sm = 25;
+        ss = 60;
+      }
+      function timerGoing(){
+        var nowDate = new Date();
+        sThen = nowDate.getSeconds();
+        ss = 60 - (sThen - sNow);
+        if(ss > 59){
+          ss = ss - 60;
+        }
+        if(ss > 58){
+          sm = sm - 1;
+        }
+        document.getElementById("accTimer").innerHTML = sm + " : " + ss;
+      }
+
+
+    </script>
+  </body>
+</html>

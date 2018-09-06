@@ -210,6 +210,7 @@
         background-repeat: no-repeat;
         height: 40%;
       }
+
   </style>
 </head>
 
@@ -264,28 +265,6 @@
   </div>
   <a-scene vr-mode-ui="enabled: false" preloader embedded sharedspace avatars arjs='debugUIEnabled:false;'>
     <a-assets>
-      <!-- map pieces -->
-      <img id="mappiece1" src="img/floormap1.png" />
-      <img id="mappiece2" src="img/floormap2.png" />
-      <img id="mappiece3" src="img/floormap3.png" />
-      <img id="mappiece4" src="img/floormap4.png" />
-      <img id="mappiece5" src="img/floormap5.png" />
-      <img id="mappiece6" src="img/floormap6.png" />
-      <!-- word find hot-cold -->
-      <img id="hotcold1" src="img/WordClues_1.png" />
-      <img id="hotcold2" src="img/WordClues_2.png" />
-      <img id="hotcold3" src="img/WordClues_3.png" />
-      <img id="hotcold4" src="img/WordClues_4.png" />
-      <img id="hotcold5" src="img/WordClues_5.png" />
-      <img id="hotcold6" src="img/WordClues_6.png" />
-      <img id="hotcold7" src="img/WordClues_7.png" />
-      <img id="hotcold8" src="img/WordClues_8.png" />
-      <!-- PIVA -->
-      <img id="PIVA1" src="img/p.png" />
-      <img id="PIVA2" src="img/i.png" />
-      <img id="PIVA3" src="img/v.png" />
-      <img id="PIVA4" src="img/a.png" />
-
       <!-- Music Stand -->
       <a-asset-item id="musicStand" src="img/MusicStandRejection.gltf"></a-asset-item>
 
@@ -300,12 +279,6 @@
 
       <!-- Concluding words and last goodbye -->
       <img id="ending" src="img/MusicReturn2.png"/>
-
-
-      <a-asset-item id="unlocked" src="img/lockUnlocked_01.gltf"></a-asset-item>
-      <a-asset-item id="locked" src="img/lock.gltf"></a-asset-item>
-      <!-- this is what animation files will look like.
-      <a-asset-item id="musicStand" src="img/MusicStandRejection.gltf"></a-asset-item>
     -->
     </a-assets>
 
@@ -365,6 +338,10 @@
     var roomName = currentUrl.search.substr(1);
     var room = document.querySelector('[sharedspace]');
     var  box1 = document.querySelector('#image1');
+    var changeThisClass1 = document.getElementById("changeThisClass1");
+    var changeThisClass2 = document.getElementById("changeThisClass2");
+    var overlayID = document.getElementById("overlayID");
+    var prize1 = document.getElementById("prize1");
     // need music piece when it is done!
 
 
@@ -388,24 +365,23 @@
 */
 
     function loadMenus(){
-      document.getElementById("changeThisClass1").classList.toggle("scannedhidden");
-      document.getElementById("changeThisClass1").classList.toggle("scanned");
-      document.getElementById("changeThisClass2").classList.toggle("hinthidden");
-      document.getElementById("changeThisClass2").classList.toggle("hints");
+      changeThisClass1.classList.toggle("scannedhidden");
+      changeThisClass1.classList.toggle("scanned");
+      changeThisClass2.classList.toggle("hinthidden");
+      changeThisClass2.classList.toggle("hints");
 
     }
 
     function overlayRemove(){
-      document.getElementById("overlayID").classList.remove("overlay");
-      document.getElementById("overlayID").classList.add("hide");
+      overlayID.classList.remove("overlay");
+      overlayID.classList.add("hide");
     }
-
-
+    
      box1.addEventListener("click", function() {
       //document.getElementById('overlayID').classList.remove("hide");
       //document.getElementById('overlayID').classList.add("overlay");
-      document.getElementById("prize1").classList.toggle("hide");
-      document.getElementById("prize1").classList.toggle("prize1");
+      prize1.classList.toggle("hide");
+      prize1.classList.toggle("prize1");
       room.components.sharedspace.send('*', {
         type: 'image1'
       })
