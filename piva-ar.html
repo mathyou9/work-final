@@ -52,6 +52,7 @@
           top: 0px;
           text-align: center;
           transition: left .25s;
+          z-index: 100;
       }
       .scannedhidden{
         position: fixed;
@@ -84,6 +85,7 @@
         top: 0px;
         text-align: center;
         transition: right .25s;
+        z-index: 100;
       }
       .buttonChanger{
         width: 100px;
@@ -225,8 +227,24 @@
       }
       .timer{
         position: fixed;
-        left: 0px;
+        left: 40vw;
         top: 0px;
+        background-color: rgba(255,255,255,.9);
+        box-shadow: 0px 0px 10px 10px rgba(255,255,255,.9);
+        height: 6vw;
+        width: 20vw;
+        font-size: 5vw;
+        text-align: center;
+        z-index: 100;
+      }
+      .mapIndicator{
+        background-image: url(img/fullFloorMap.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        display: none;
+        position: relative;
+        width: 200px;
+        height: 200px;
       }
   </style>
 </head>
@@ -273,9 +291,12 @@
       <div class="mapchecker" id="mapchecker" onclick="mapcheckerfunction();">
         Click here to see if the pattern is correct
       </div>
+      <div class="textRecievedMap" id="textRecievedMap"></div>
+      <div class="mapIndicator" id="mapIndicator"></div>
       <div class="mapCloser" id="mapCloser" onclick="redeemOverlayCloser();">
         Click here to close
       </div>
+
     </div>
   </div>
   <div class="hide" id="tempContinue">
@@ -444,31 +465,47 @@
     var overlayID = document.getElementById("overlayID");
     var hintsId = document.getElementById("hintsid");
     var checkmark = document.getElementById("checkmark");
+    var mapChecker = document.getElementById("mapchecker");
+    var mapCloser = document.getElementById("mapCloser");
+    var mapIndicator = document.getElementById("mapIndicator");
+    var textRecievedMap = document.getElementById("textRecievedMap");
     // need music piece when it is done!
 
 
     //Timer
-    var sm = 25;
+    var sm = 10;
     var ss = 60;
     var thenDate = new Date();
+    var thenDate2;
     var sNow = thenDate.getSeconds();
     var sThen;
-    var setSecondTime = setInterval(timerGoing, 1000);
+    var setSecondTime;
+    var nowDate;
+    var minutes;
     function startTime(){
-      var thenDate2 = new Date();
+      thenDate2 = new Date();
       sNow = thenDate2.getSeconds();
-      sm = 25;
-      ss = 60;
+      if(!setSecondTime){
+        setSecondTime = setInterval(timerGoing, 1000);
+      }
     }
     function timerGoing(){
-      var nowDate = new Date();
+      nowDate = new Date();
       sThen = nowDate.getSeconds();
       ss = 60 - (sThen - sNow);
       if(ss > 59){
         ss = ss - 60;
       }
-      if(ss > 58){
-        sm = sm - 1;
+      //if(ss >= 59){
+      //  sm = sm - 1;
+      //}
+      minutes = Math.floor(((nowDate - thenDate2)/1000)/60);
+      sm = 9-minutes;
+      if(sm < 0){
+        sm = 0;
+        ss = 0;
+        clearInterval(setSecondTime);
+        setSecondTime = false;
       }
       document.getElementById("timer").innerHTML = sm + " : " + ss;
     }
@@ -526,6 +563,8 @@
         prize2.classList.add("prize2");
         checkmark.classList.add("checkmark");
         checkmark.classList.remove("hide");
+        mapChecker.style.display = "none";
+        mapIndicator.style.display = "block";
         room.components.sharedspace.send('*', {
           type: 'map'
         })
@@ -634,6 +673,13 @@
         } else{
           hintsId.innerHTML = hintsId.innerHTML + "<br />" + evt.detail.message.mainmessage;
         }
+      }
+      if (evt.detail.message.type === 'pivaReset'){
+          startTime();
+      }
+      if (evt.detail.message.type === 'pivaStop'){
+        clearInterval(setSecondTime);
+        setSecondTime = false;
       }
       /*
       if (evt.detail.message.type === 'image2') {

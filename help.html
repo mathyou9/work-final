@@ -25,6 +25,12 @@
       </div>
       Sent hints:
       <div class="sent" id="pivaSent"></div>
+      <div class="resetTimer" id="pivaReset" onclick="pivaResetTimer();">
+        Click here to reset the timer
+      </div>
+      <div class="stopTimer" id="stopPivaTimer" onclick="stopPivaTimer();">
+        Click here to stop the timer
+      </div>
     </div>
     <div class="lloyd">
       Completed:
@@ -61,6 +67,17 @@
         room.components.sharedspace.send('*', {
           type: 'hint1',
           mainmessage: customHint.innerHTML
+        })
+      }
+
+      function pivaResetTimer(){
+        room.components.sharedspace.send('*', {
+          type: 'pivaReset'
+        })
+      }
+      function stopPivaTimer(){
+        room.components.sharedspace.send('*', {
+          type: 'pivaStop'
         })
       }
 
