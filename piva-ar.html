@@ -120,6 +120,15 @@
           background-size: contain;
           background-repeat: no-repeat;
       }
+      .prize3{
+          width: 100px;
+          height: 110px;
+          margin: 10px;
+          background: url(img/MusicScore.png);
+          display: inline-block;
+          background-size: contain;
+          background-repeat: no-repeat;
+      }
       .hide{
           display: none;
           transition: all 1s;
@@ -252,8 +261,8 @@
 <body>
   <div class="scannedhidden" id="changeThisClass1">
     <div class="items">Things you have found:</div>
-    <div class="hide" id="prize1"></div>
     <div class="hide" id="prize2"></div>
+    <div class="hide" id="prize3"></div>
   </div>
   <div class="hinthidden" id="changeThisClass2">
     <div class="items">
@@ -321,14 +330,7 @@
       <img id="mappiece5" src="img/floormap5.png" />
       <img id="mappiece6" src="img/floormap6.png" />
       <!-- word find hot-cold -->
-      <img id="hotcold1" src="img/WordClues_1.png" />
-      <img id="hotcold2" src="img/WordClues_2.png" />
-      <img id="hotcold3" src="img/WordClues_3.png" />
-      <img id="hotcold4" src="img/WordClues_4.png" />
-      <img id="hotcold5" src="img/WordClues_5.png" />
-      <img id="hotcold6" src="img/WordClues_6.png" />
-      <img id="hotcold7" src="img/WordClues_7.png" />
-      <img id="hotcold8" src="img/WordClues_8.png" />
+      <img id="musicPiece" src="img/musicScore.png" />
       <!-- PIVA -->
       <img id="PIVA1" src="img/p.png" />
       <img id="PIVA2" src="img/i.png" />
@@ -371,29 +373,8 @@
     </a-marker>
 
     <!-- Word Clues -->
-    <a-marker id="image16" preset="pattern" type="pattern" url="markers/viola2Target.patt">
-      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#hotcold1" material="alphaTest:0.5" shadow></a-image>
-    </a-marker>
-    <a-marker id="image17" preset="pattern" type="pattern" url="markers/viola3Target.patt">
-      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#hotcold2" material="alphaTest:0.5" shadow></a-image>
-    </a-marker>
-    <a-marker id="image6" preset="pattern" type="pattern" url="markers/HBLeeTarget.patt">
-      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#hotcold3" material="alphaTest:0.5" shadow></a-image>
-    </a-marker>
-    <a-marker id="image3" preset="pattern" type="pattern" url="markers/eighthNoteTarget.patt">
-      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#hotcold4" material="alphaTest:0.5" shadow></a-image>
-    </a-marker>
-    <a-marker id="image1" preset="pattern" type="pattern" url="markers/bassClefTarget.patt">
-      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#hotcold5" material="alphaTest:0.5" shadow></a-image>
-    </a-marker>
-    <a-marker id="image4" preset="pattern" type="pattern" url="markers/ghostTarget.patt">
-      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#hotcold6" material="alphaTest:0.5" shadow></a-image>
-    </a-marker>
-    <a-marker id="image14" preset="pattern" type="pattern" url="markers/trebleTarget.patt">
-      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#hotcold7" material="alphaTest:0.5" shadow></a-image>
-    </a-marker>
-    <a-marker id="image12" preset="pattern" type="pattern" url="markers/quarterNoteTarget.patt">
-      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#hotcold8" material="alphaTest:0.5" shadow></a-image>
+    <a-marker id="obtainMusic" preset="pattern" type="pattern" url="markers/viola3Target.patt">
+      <a-image position="0 0 0" rotation="-90 0 0" width="1.5" height="1.5" src="#musicPiece" material="alphaTest:0.5" shadow></a-image>
     </a-marker>
 
     <!-- PIVA -->
@@ -452,8 +433,8 @@
     var location5 = document.getElementById("map5location");
     var location6 = document.getElementById("map6location");
     var lock = document.getElementById("lockMarker");
-    var prize1 = document.getElementById("prize1");
     var prize2 = document.getElementById("prize2");
+    var prize3 = document.getElementById("prize3");
     var redeemOverlay = document.getElementById("redeemOverlay");
     var tempContinue = document.getElementById("tempContinue");
     var contentId = document.getElementById("contentId");
@@ -469,6 +450,7 @@
     var mapCloser = document.getElementById("mapCloser");
     var mapIndicator = document.getElementById("mapIndicator");
     var textRecievedMap = document.getElementById("textRecievedMap");
+    var obtainMusic = document.getElementById("obtainMusic");
     // need music piece when it is done!
 
 
@@ -613,11 +595,19 @@
       redeemOverlay.classList.add("hide");
     }
 
+    obtainMusic.addEventListener("click", function(){
+      prize3.classList.remove("hide");
+      prize3.classList.add("prize3");
+      room.components.sharedspace.send('*', {
+        type: 'music'
+      })
+    });
+
     mapRedeem.addEventListener("click", function(){
       redeemOverlay.classList.remove("hide");
       redeemOverlay.classList.add("overlay");
     });
-
+/*
     box1.addEventListener("click", function() {
       //document.getElementById('overlayID').classList.remove("hide");
       //document.getElementById('overlayID').classList.add("overlay");
@@ -627,16 +617,24 @@
         type: 'image1'
       })
     });
-
+*/
     lockMarker.addEventListener("click", function() {
       tempContinue.classList.remove("hide");
       tempContinue.classList.add("overlay");
       if(prize2.className == "hide"){
-        contentId.innerHTML = "Sorry, you need to find the music and the map first! <br />How else would you know where to go?";
+        pivaChecker.style.display = "none";
+        if(prize3.className == "hide"){
+          contentId.innerHTML = "Sorry, you need to find the music and the map first! <br />How else would you know where to go?";
+        } else{
+          contentId.innerHTML = "Sorry, you need to find the map first! <br  /> How else would you know where to go?";
+        }
+      }
+      else if(prize3.className == "hide"){
+        contentId.innerHTML = "Sorry, you need to find the music to return to the Lloyd room. That is the reason you are here!";
         pivaChecker.style.display = "none";
       } else{
         contentId.innerHTML = "Input your code here:";
-        contentId.style.display = "block";
+        pivaChecker.style.display = "block";
       }
     });
 
@@ -651,13 +649,14 @@
     */
 
     room.addEventListener('participantmessage', function(evt) {
-      if (evt.detail.message.type === 'image1') {
-        prize1.classList.remove("hide");
-        prize1.classList.add("prize1");
-      }
       if (evt.detail.message.type === 'map') {
         prize2.classList.remove("hide");
         prize2.classList.add("prize2");
+      }
+      //still havent set up trigger. Dont have music yet.
+      if (evt.detail.message.type === 'music') {
+        prize3.classList.remove("hide");
+        prize3.classList.add("prize3");
       }
       if (evt.detail.message.type === 'continueToLloyd') {
         tempContinue.classList.remove("hide");

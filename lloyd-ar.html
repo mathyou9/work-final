@@ -309,12 +309,17 @@
 
     <!-- MusicReturn -->
     <a-marker id="image16" preset="pattern" type="pattern" url="markers/typewriterTarget.patt">
-      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#ending" material="alphaTest:0.5" shadow></a-image>
+      <a-image position="0 0 0" rotation="-90 0 0" width="1.5" height="1.5" src="#ending" material="alphaTest:0.5" shadow></a-image>
     </a-marker>
 
     <!--lloyd whiteboard trick -->
+    <!--
     <a-marker id="mapRedeemMarker" preset="pattern" type="pattern" url="markers/diamondStencilTarget.patt">
       <a-image position="0 .25 0" rotation="-90 0 0" width="1" height="1" src="#hotcold3" material="alphaTest:0.5" shadow></a-image>
+    </a-marker>
+-->
+    <a-marker id="mapRedeemMarker" preset="pattern" type="pattern" url="markers/triangleTarget.patt">
+      <a-image position="0 0 0" rotation="-90 0 0" width="1" height="1" src="#ending" material="alphaTest:0.5" shadow></a-image>
     </a-marker>
 
 
@@ -376,7 +381,7 @@
       overlayID.classList.remove("overlay");
       overlayID.classList.add("hide");
     }
-    
+
      box1.addEventListener("click", function() {
       //document.getElementById('overlayID').classList.remove("hide");
       //document.getElementById('overlayID').classList.add("overlay");
