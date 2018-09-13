@@ -46,19 +46,22 @@
           position: fixed;
           display:inline-block;
           width: 200px;
-          background-color: white;
+          background-color: #93AFC7;
+          box-shadow: inset 0px 0px 0px 10px #2C3D4D;
+          border-radius: 10px;
+          padding: 0px;
           height: 100%;
           left: 0%;
           top: 0px;
           text-align: center;
           transition: left .25s;
           z-index: 100;
+          font-size: 3vw;
       }
       .scannedhidden{
         position: fixed;
         display:inline-block;
         width: 200px;
-        background-color: white;
         height: 100%;
         top: 0px;
         left: -200px;
@@ -68,7 +71,6 @@
         position: fixed;
         display: inline-block;
         width: 200px;
-        background-color: white;
         height: 100%;
         top: 0px;
         text-align: center;
@@ -79,20 +81,23 @@
         position: fixed;
         display: inline-block;
         width: 200px;
-        background-color: white;
+        background-color: #93AFC7;
+        box-shadow: inset 0px 0px 0px 10px #2C3D4D;
+        border-radius: 10px;
         height: 100%;
         right: 0px;
         top: 0px;
         text-align: center;
         transition: right .25s;
         z-index: 100;
+        font-size: 3vw;
       }
       .buttonChanger{
-        width: 100px;
-        height: 100px;
+        width: 200px;
+        height: 58px;
         position: fixed;
-        background-image: url("img/Menu.png");
-        background-size: 100px 100px;
+        background-image: url("img/Menu.svg");
+        background-size: contain;
         background-repeat: no-repeat;
         z-index: 100;
         margin:0px;
@@ -112,10 +117,13 @@
           background-size: contain;
       }
       .prize2{
-          width: 100px;
+          width: 180px;
           height: 110px;
           margin: 10px;
           background: url(img/fullFloorMap.png);
+          background-color: #2C3D4D;
+          box-shadow:0px 0px 0px 5px #2C3D4D;
+          background-position: center;
           display: inline-block;
           background-size: contain;
           background-repeat: no-repeat;
@@ -137,20 +145,40 @@
           display: block;
           width: 100%;
           height: 25px;
+          margin-top: 10px;
+          padding-bottom: 10px;
       }
       .overlay{
         position: fixed;
         display: inline-block;
-        z-index: 50;
+        z-index: 150;
         width: 80%;
         height: 80%;
-        background-color: rgba(10,10,10,.9);
+        background-color: rgba(44,61,77,.9);
+        box-shadow: inset 0px 0px 0px 10px rgba(147,175,199,1);
         color: white;
         left: 10%;
         top: 4%;
         text-align: center;
         border-radius: 5vw;
         padding-top: 10vw;
+        font-size: 3vw;
+      }
+      .defaultOverlay{
+        position: fixed;
+        display: inline-block;
+        z-index: 150;
+        width: 80%;
+        height: 80%;
+        background-color: rgba(44,61,77,.9);
+        box-shadow: inset 0px 0px 0px 10px rgba(147,175,199,1);
+        color: white;
+        left: 10%;
+        top: 4%;
+        text-align: center;
+        border-radius: 5vw;
+        padding-top: 10vw;
+        font-size: 3vw;
       }
       .centerDiv{
         width: 80%;
@@ -252,8 +280,39 @@
         background-repeat: no-repeat;
         display: none;
         position: relative;
-        width: 200px;
+        width: 100%;
         height: 200px;
+        background-position: center;
+      }
+      .exitDefault{
+        position: relative;
+        display: inline-block;
+        width: 20vw;
+        height: 9vw;
+        background-image: url(img/continue.svg);
+        background-repeat: no-repeat;
+        background-size: contain;
+      }
+      .spacer{
+        position: relative;
+        display: inline-block;
+        width:50vw;
+      }
+      .mapChecker{
+        background-image: url(img/Submit.svg);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        height: 5vw;
+        width: 100%;
+      }
+      .mapCloser{
+        background-image: url(img/Exit_1.svg);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        height: 5vw;
+        width: 100%;
       }
   </style>
 </head>
@@ -261,12 +320,11 @@
 <body>
   <div class="scannedhidden" id="changeThisClass1">
     <div class="items">Things you have found:</div>
-    <div class="hide" id="prize2"></div>
-    <div class="hide" id="prize3"></div>
+    <div class="hide" id="prize2" onclick="openMapOverlay();"></div>
+    <div class="hide" id="prize3" onclick="openMusicOverlay();"></div>
   </div>
   <div class="hinthidden" id="changeThisClass2">
-    <div class="items">
-      Hints:
+    <div class="items">Hints:
       <div class="hintsclass" id="hintsid"></div>
     </div>
   </div>
@@ -297,16 +355,19 @@
       <div class="map1" id="map4location" onclick="changeimage(this);"></div>
       <div class="map1" id="map5location" onclick="changeimage(this);"></div>
       <div class="map1" id="map6location" onclick="changeimage(this);"></div>
-      <div class="mapchecker" id="mapchecker" onclick="mapcheckerfunction();">
-        Click here to see if the pattern is correct
-      </div>
+      <div class="mapchecker" id="mapchecker" onclick="mapcheckerfunction();"></div>
       <div class="textRecievedMap" id="textRecievedMap"></div>
       <div class="mapIndicator" id="mapIndicator"></div>
-      <div class="mapCloser" id="mapCloser" onclick="redeemOverlayCloser();">
-        Click here to close
-      </div>
+      <div class="mapCloser" id="mapCloser" onclick="redeemOverlayCloser();"></div>
 
     </div>
+  </div>
+  <div class="hide" id="defaultOverlay">
+    <div class="overlayTitle" id="overlayTitle"></div>
+    <div class="overlayDescription" id="overlayDescription"></div>
+    <div class="overlayPic" id="overlayPic"></div> <br />
+    <div class="spacer"></div>
+    <div class="exitDefault" id="exitDefault" onclick="defaultOverlayRemove();"></div>
   </div>
   <div class="hide" id="tempContinue">
     <div class="centerDiv">
@@ -451,6 +512,10 @@
     var mapIndicator = document.getElementById("mapIndicator");
     var textRecievedMap = document.getElementById("textRecievedMap");
     var obtainMusic = document.getElementById("obtainMusic");
+    var defaultOverlay = document.getElementById("defaultOverlay");
+    var overlayTitle = document.getElementById("overlayTitle");
+    var overlayDescription = document.getElementById("overlayDescription");
+    var overlayPic = document.getElementById("overlayPic");
     // need music piece when it is done!
 
 
@@ -492,6 +557,50 @@
       document.getElementById("timer").innerHTML = sm + " : " + ss;
     }
 
+    function openMapOverlay(){
+      defaultOverlay.classList.remove("hide");
+      defaultOverlay.classList.add("defaultOverlay");
+      overlayTitle.innerHTML = "The map to Lloyds Room";
+      if(prize3.className == "hide"){
+        overlayDescription.innerHTML = "You've found the map. Now all you need is the music.";
+        overlayPic.classList.remove("prize3");
+        overlayPic.classList.add("prize2");
+        overlayPic.style.width = "200";
+        overlayPic.style.height = "220";
+      }
+      else{
+        overlayDescription.innerHTML = "You've found the music and the map. If you know the passcode to the lock, get out, before they try to catch you!";
+        overlayPic.classList.remove("prize3");
+        overlayPic.classList.add("prize2");
+        overlayPic.style.width = "200";
+        overlayPic.style.height = "220";
+      }
+    }
+
+    function openMusicOverlay(){
+      defaultOverlay.classList.remove("hide");
+      defaultOverlay.classList.add("defaultOverlay");
+      overlayTitle.innerHTML = "The Lost Music";
+      if(prize2.className == "hide"){
+        overlayDescription.innerHTML = "You've found the music. Now all you need is the map.";
+        overlayPic.classList.remove("prize2");
+        overlayPic.classList.add("prize3");
+        overlayPic.style.width = "200";
+        overlayPic.style.height = "220";
+      }
+      else{
+        overlayDescription.innerHTML = "You've found the music and the map. If you know the passcode to the lock, get out, before they try to catch you!";
+        overlayPic.classList.remove("prize2");
+        overlayPic.classList.add("prize3");
+        overlayPic.style.width = "200";
+        overlayPic.style.height = "220";
+      }
+    }
+
+    function defaultOverlayRemove(){
+      defaultOverlay.classList.remove("defaultOverlay");
+      defaultOverlay.classList.add("hide");
+    }
 
 
     //These lines fix a scrolling problem.
@@ -547,6 +656,7 @@
         checkmark.classList.remove("hide");
         mapChecker.style.display = "none";
         mapIndicator.style.display = "block";
+        mapCloser.style.backgroundImage = "url(img/Continue.svg)";
         room.components.sharedspace.send('*', {
           type: 'map'
         })
@@ -598,6 +708,23 @@
     obtainMusic.addEventListener("click", function(){
       prize3.classList.remove("hide");
       prize3.classList.add("prize3");
+      defaultOverlay.classList.remove("hide");
+      defaultOverlay.classList.add("defaultOverlay");
+      overlayTitle.innerHTML = "The Lost Music";
+      if(prize2.className == "hide"){
+        overlayDescription.innerHTML = "You've found the music. Now all you need is the map.";
+        overlayPic.classList.remove("prize2");
+        overlayPic.classList.add("prize3");
+        overlayPic.style.width = "200";
+        overlayPic.style.height = "220";
+      }
+      else{
+        overlayDescription.innerHTML = "You've found the music and the map. If you know the passcode to the lock, get out, before they try to catch you!";
+        overlayPic.classList.remove("prize2");
+        overlayPic.classList.add("prize3");
+        overlayPic.style.width = "200";
+        overlayPic.style.height = "220";
+      }
       room.components.sharedspace.send('*', {
         type: 'music'
       })
