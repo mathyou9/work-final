@@ -29,7 +29,6 @@
       css should always be written in here. It is possible to write it inline with other code throughout the HTML, but really bad practice and bad organization. KEEP IT UP HERE!
       To use css use class="classname" (classname being any name you want) in the HTML then to change what you want that element to look like by typing .classname{} inside the curly brackets type different parameters you would like to change. common ones are width, height, position, display, opacity, background-color, background-image, text-align, left, right, and many more. After you decide what you want to change just put a colon and what you want to change it to. Such as... .name{width: 50%;}
       */
-
       body{
           width: 100%;
           height: 100%;
@@ -602,14 +601,13 @@
       defaultOverlay.classList.add("hide");
     }
 
-
     //These lines fix a scrolling problem.
     var fixed = document.getElementById('buttonChanger');
     fixed.addEventListener('touchmove', function(e) {
             e.preventDefault();
     }, false);
 
-/*
+    /*
     function myChecker(){
       if(document.getElementById("userInput").innerHTML == "hello"){
         document.getElementById("prize1").classList.remove("hide");
@@ -621,6 +619,7 @@
       }
     }
 */
+    //changes images mapChecker
     function changeimage(el){
       if(el.className == "map1"){
           el.classList.remove("map1");
@@ -647,7 +646,7 @@
         el.classList.add("map1");
       }
     }
-
+    //Checks to see if pattern is correct
     function mapcheckerfunction(){
       if(location1.className == "map1" && location2.className == "map2" && location3.className == "map3" && location4.className == "map4" && location5.className == "map5" && location6.className == "map6"){
         prize2.classList.remove("hide");
@@ -662,7 +661,7 @@
         })
       }
     }
-
+    //closes mapchecker overlay
     function closerFunction(){
       if(document.getElementById('closerId').innerHTML == "Click here to continue!"){
         window.location = "map.html";
@@ -674,7 +673,7 @@
         tempContinue.classList.add("hide");
       }
     }
-
+    //checks to see if they have PIVA correct
     function pivaCheckerFunction(){
       if(wordInput.innerHTML == "piva" || wordInput.innerHTML == "Piva" || wordInput.innerHTML == "PIVA"){
         contentId.innerHTML = "Correct! Congrats";
@@ -686,7 +685,7 @@
         contentId.innerHTML = "Try again:";
       }
     }
-
+    //opens menu onclick
     function loadMenus(){
       changeThisClass1.classList.toggle("scannedhidden");
       changeThisClass1.classList.toggle("scanned");
@@ -694,12 +693,12 @@
       changeThisClass2.classList.toggle("hints");
 
     }
-
+    //removes overlay
     function overlayRemove(){
       overlayID.classList.remove("overlay");
       overlayID.classList.add("hide");
     }
-
+    //map redeem overlay remover
     function redeemOverlayCloser(){
       redeemOverlay.classList.remove("overlay");
       redeemOverlay.classList.add("hide");
@@ -734,7 +733,7 @@
       redeemOverlay.classList.remove("hide");
       redeemOverlay.classList.add("overlay");
     });
-/*
+    /*
     box1.addEventListener("click", function() {
       //document.getElementById('overlayID').classList.remove("hide");
       //document.getElementById('overlayID').classList.add("overlay");
@@ -818,5 +817,4 @@
     room.setAttribute('sharedspace', {room: 101, hold: false});
   </script>
 </body>
-
 </html>

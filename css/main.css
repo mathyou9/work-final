@@ -20,13 +20,16 @@ body{
   top: 10vw
 }
 .continue{
-  width: 100px;
+  width: 30vw;
   position: absolute;
   display: block;
   bottom: 0px;
   right: 0px;
-  height: 50px;
-  background-color: rgba(50,50,50,1);
+  height: 8vw;
+  background-image:url(/img/Continue.svg);
+  background-size: contain;
+  background-position: right;
+  background-repeat: no-repeat;
   color: white;
 }
 .fullMap{
@@ -44,7 +47,7 @@ body{
   display: block;
   text-align: center;
   left: 15%;
-  font-size: 2vw;
+  font-size: 3vw;
 }
 .musicInstructions{
   width: 70%;

@@ -48,18 +48,22 @@
           position: fixed;
           display:inline-block;
           width: 200px;
-          background-color: white;
+          background-color: #93AFC7;
+          box-shadow: inset 0px 0px 0px 10px #2C3D4D;
+          border-radius: 10px;
+          padding: 0px;
           height: 100%;
           left: 0%;
           top: 0px;
           text-align: center;
           transition: left .25s;
+          z-index: 100;
+          font-size: 3vw;
       }
       .scannedhidden{
         position: fixed;
         display:inline-block;
         width: 200px;
-        background-color: white;
         height: 100%;
         top: 0px;
         left: -200px;
@@ -69,7 +73,6 @@
         position: fixed;
         display: inline-block;
         width: 200px;
-        background-color: white;
         height: 100%;
         top: 0px;
         text-align: center;
@@ -80,19 +83,23 @@
         position: fixed;
         display: inline-block;
         width: 200px;
-        background-color: white;
+        background-color: #93AFC7;
+        box-shadow: inset 0px 0px 0px 10px #2C3D4D;
+        border-radius: 10px;
         height: 100%;
         right: 0px;
         top: 0px;
         text-align: center;
         transition: right .25s;
+        z-index: 100;
+        font-size: 3vw;
       }
       .buttonChanger{
-        width: 100px;
-        height: 100px;
+        width: 200px;
+        height: 58px;
         position: fixed;
-        background-image: url("img/Menu.png");
-        background-size: 100px 100px;
+        background-image: url("img/Menu.svg");
+        background-size: contain;
         background-repeat: no-repeat;
         z-index: 100;
         margin:0px;
@@ -127,18 +134,24 @@
           display: block;
           width: 100%;
           height: 25px;
+          margin-top: 10px;
+          padding-bottom: 10px;
       }
       .overlay{
         position: fixed;
         display: inline-block;
-        z-index: 50;
+        z-index: 150;
         width: 80%;
         height: 80%;
-        background-color: rgba(10,10,10,.8);
+        background-color: rgba(44,61,77,.9);
+        box-shadow: inset 0px 0px 0px 10px rgba(147,175,199,1);
         color: white;
         left: 10%;
         top: 4%;
         text-align: center;
+        border-radius: 5vw;
+        padding-top: 10vw;
+        font-size: 3vw;
       }
       .centerDiv{
         width: 80%;
