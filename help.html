@@ -31,6 +31,7 @@
       <div class="stopTimer" id="stopPivaTimer" onclick="stopPivaTimer();">
         Click here to stop the timer
       </div>
+      <div class="requestedHints" id="requestedHints"></div>
     </div>
     <div class="lloyd">
       Completed:
@@ -46,6 +47,8 @@
       <div class="sent" id="lloydSent"></div>
     </div>
     <script>
+       var requestedHints = document.getElementById('requestedHints');
+       var now = null;
       var currentUrl = new URL(window.location);
       var roomName = currentUrl.search.substr(1);
       var room = document.querySelector('[sharedspace]');
@@ -88,6 +91,10 @@
           }
           if (evt.detail.message.type === 'continueToLloyd') {
 
+          }
+          if (evt.detail.message.type == 'pivaHintRequested') {
+            now = new Date();
+            requestedHints.innerHTML = requestedHints.innerHTML + '<br />' + now;
           }
       });
       room.setAttribute('sharedspace', {room: 101, hold: false});

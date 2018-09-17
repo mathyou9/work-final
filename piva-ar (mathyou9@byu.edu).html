@@ -344,66 +344,6 @@
         height: 5vw;
         width: 100%;
       }
-      .hintAsk{
-        background-image: url(img/Hint.svg);
-        backgroud-size: contain;
-        background-repeat: no-repeat;
-        background-position: center;
-        height: 5vw;
-        width: 100%;
-      }
-      .objectivesAsk{
-        background-image: url(img/Objectives.svg);
-        backgroud-size: contain;
-        background-repeat: no-repeat;
-        background-position: center;
-        height: 5vw;
-        width: 100%;
-      }
-      .menuCloser{
-        background-image: url(img/Exit_1.svg);
-        backgroud-size: contain;
-        background-repeat: no-repeat;
-        background-position: center;
-        height: 5vw;
-        width: 100%;
-      }
-      .menuMiddle{
-        position: fixed;
-        display: inline-block;
-        z-index: 150;
-        width: 40%;
-        height: 20%;
-        background-color: rgba(44,61,77,.9);
-        box-shadow: inset 0px 0px 0px 10px rgba(147,175,199,1);
-        color: white;
-        left: 30%;
-        top: 35%;
-        text-align: center;
-        border-radius: 5vw;
-        padding-top: 10vw;
-        font-size: 3vw;
-        transition: transform .3s;
-      }
-      .menuBottom{
-        position: fixed;
-        display: inline-block;
-        z-index: 150;
-        width: 40%;
-        height: 20%;
-        background-color: rgba(44,61,77,.9);
-        box-shadow: inset 0px 0px 0px 10px rgba(147,175,199,1);
-        color: white;
-        left: 30%;
-        top: 35%;
-        text-align: center;
-        border-radius: 5vw;
-        padding-top: 10vw;
-        font-size: 3vw;
-        transform: translateY(90vh);
-        -webkit-transform: translateY(90vh);
-        transition: transform .3s;
-      }
   </style>
 </head>
 
@@ -417,11 +357,6 @@
     <div class="items">Hints:
       <div class="hintsclass" id="hintsid"></div>
     </div>
-  </div>
-  <div class="menuBottom" id="menuMiddle">
-    <div class="hintAsk" onclick="pivaHintRequestFunction();"></div>
-    <div class="objectivesAsk" onclick="closeRules();"></div>
-    <div class="menuCloser" onclick="loadMenus();"></div>
   </div>
   <div class="buttonChanger" id="buttonChanger" onclick="loadMenus();">
   </div>
@@ -454,7 +389,6 @@
         Find the four-letter code goes to the lock on the door handle.
       </li>
     </ol>
-    By clicking begin below you agree to the rules above, and are willing to abide with them.
     <div class="begin" id="begin" onclick="closeRules();"></div>
   </div>
   <!--
@@ -666,7 +600,6 @@
     var overlayPic = document.getElementById("overlayPic");
     var begin = document.getElementById("begin");
     var objectives = document.getElementById("pivaObjectives");
-    var menuMiddle = document.getElementById("menuMiddle");
     // need music piece when it is done!
 
 
@@ -843,8 +776,6 @@
       changeThisClass1.classList.toggle("scanned");
       changeThisClass2.classList.toggle("hinthidden");
       changeThisClass2.classList.toggle("hints");
-      menuMiddle.classList.toggle("menuMiddle");
-      menuMiddle.classList.toggle("menuBottom");
 
     }
     //removes overlay
@@ -859,14 +790,10 @@
     }
 
     function closeRules(){
-      objectives.classList.toggle("objectives");
-      objectives.classList.toggle("hide");
-    }
-
-    function pivaHintRequestFunction(){
-      room.components.sharedspace.send('*', {
-        type: 'pivaHintRequested'
-      })
+      if(begin.style.backgroundImage == " url(img/Begin.svg)"){
+        objectives.classList.remove("objectives");
+        objectives.classList.add("hide");
+      }
     }
 
     obtainMusic.addEventListener("click", function(){

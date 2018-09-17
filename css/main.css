@@ -26,7 +26,7 @@ body{
   bottom: 0px;
   right: 0px;
   height: 8vw;
-  background-image:url(/img/Continue.svg);
+  background-image:url(../img/Continue.svg);
   background-size: contain;
   background-position: right;
   background-repeat: no-repeat;
