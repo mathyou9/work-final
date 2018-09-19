@@ -404,6 +404,19 @@
         -webkit-transform: translateY(90vh);
         transition: transform .3s;
       }
+      .sentHintIndicator{
+        background-image: url(img/Sent.svg);
+        backgroud-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        height: 5vw;
+        width: 100%;
+      }
+      .objectiveContainer{
+        position: relative;
+        width: 80%;
+        left: 10%;
+      }
   </style>
 </head>
 
@@ -419,7 +432,7 @@
     </div>
   </div>
   <div class="menuBottom" id="menuMiddle">
-    <div class="hintAsk" onclick="pivaHintRequestFunction();"></div>
+    <div class="hintAsk" id="hintAsk" onclick="pivaHintRequestFunction();"></div>
     <div class="objectivesAsk" onclick="closeRules();"></div>
     <div class="menuCloser" onclick="loadMenus();"></div>
   </div>
@@ -427,35 +440,46 @@
   </div>
   <div class="timer" id="timer"></div>
   <div class="objectives" id="pivaObjectives">
-    Rules:<br />
-    <ol>
-      <li>
-        Dont touch things in this room like the pictures and statues.
-      </li>
-      <li>
-        Shelves are ok to touch, as long as you replace the documents that you remove.
-      </li>
-      <li>
-        If things are locked don't break locks.
-      </li>
-      <li>
-        This is an amazing room in campus and we need to respect it. Please take the best care of it you can while enjoying the escape room.
-      </li>
-    </ol>
-    Objectives: <br />
-    <ol>
-      <li>
-        Find the music that Emily threw in this room to prove your innocence.
-      </li>
-      <li>
-        Find and complete the puzzle map. You will need this to know where to take the music.
-      </li>
-      <li>
-        Find the four-letter code goes to the lock on the door handle.
-      </li>
-    </ol>
-    By clicking begin below you agree to the rules above, and are willing to abide with them.
-    <div class="begin" id="begin" onclick="closeRules();"></div>
+    <div class="objectiveContainer">
+      Objectives: <br />
+      <ol>
+        <li>
+          Find the music that Emily hid in the room in time for Stephany to play it for her recital!
+          <!--
+          Find the music that Emily placed in this room to prove your innocence before BYU Police arrives in 10 minutes.
+        -->
+        </li>
+        <li>
+          Complete the puzzle map to know where to deliver Stephany's music to.
+          <!--
+          Find and complete the puzzle map. You will need this to know where to take the music.
+        -->
+        </li>
+        <li>
+          Find the code that unlocks the door so you can leave the room and deliver the music!
+          <!--
+          Find the four-letter code goes to the lock on the door handle.
+        -->
+        </li>
+      </ol>
+      Rules:<br />
+      <ol>
+        <li>
+          Use your iPad to scan the targets around the room for clues. Some targets will be hidden.
+        </li>
+        <li>
+          Please do not touch or move anything on display. You will not need to move them as part of the escape room.
+        </li>
+        <li>
+          If things are locked don't break locks.
+        </li>
+        <li>
+          Please take the best care of the room that you can while enjoying the escape room!
+        </li>
+      </ol>
+      By clicking begin below you agree to the rules above, and are willing to abide with them.
+      <div class="begin" id="begin" onclick="closeRules();"></div>
+    </div>
   </div>
   <!--
   <div class="hide" id="overlayID">
@@ -506,12 +530,12 @@
   <a-scene vr-mode-ui="enabled: false" preloader embedded sharedspace avatars arjs='debugUIEnabled:false;'>
     <a-assets>
       <!-- map pieces -->
-      <img id="mappiece1" src="img/floormap1.png" />
-      <img id="mappiece2" src="img/floormap2.png" />
-      <img id="mappiece3" src="img/floormap3.png" />
-      <img id="mappiece4" src="img/floormap4.png" />
-      <img id="mappiece5" src="img/floormap5.png" />
-      <img id="mappiece6" src="img/floormap6.png" />
+      <img id="mappiece1" src="img/topLeft.png" />
+      <img id="mappiece2" src="img/topMiddle.png" />
+      <img id="mappiece3" src="img/topRight.png" />
+      <img id="mappiece4" src="img/bottomLeft.png" />
+      <img id="mappiece5" src="img/bottomMiddle.png" />
+      <img id="mappiece6" src="img/bottomRight.png" />
       <!-- word find hot-cold -->
       <img id="musicPiece" src="img/musicScore.png" />
       <!-- PIVA -->
@@ -543,22 +567,22 @@
 
     <!-- Map pieces -->
     <a-marker id="mappiece1" preset="pattern" type="pattern" url="markers/papermap1.patt">
-      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#mappiece1" material="alphaTest:0.5" shadow></a-image>
+      <a-image position="0 .25 0" rotation="-90 0 0" width="2.5" height="2.5" src="#mappiece1" material="alphaTest:0.5" shadow></a-image>
     </a-marker>
     <a-marker id="mappiece2" preset="pattern" type="pattern" url="markers/papermap2.patt">
-      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#mappiece2" material="alphaTest:0.5" shadow></a-image>
+      <a-image position="0 .25 0" rotation="-90 0 0" width="2.5" height="2.5" src="#mappiece2" material="alphaTest:0.5" shadow></a-image>
     </a-marker>
     <a-marker id="mappiece3" preset="pattern" type="pattern" url="markers/papermap3.patt">
-      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#mappiece3" material="alphaTest:0.5" shadow></a-image>
+      <a-image position="0 .25 0" rotation="-90 0 0" width="2.5" height="2.5" src="#mappiece3" material="alphaTest:0.5" shadow></a-image>
     </a-marker>
     <a-marker id="mappiece4" preset="pattern" type="pattern" url="markers/papermap4.patt">
-      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#mappiece4" material="alphaTest:0.5" shadow></a-image>
+      <a-image position="0 .25 0" rotation="-90 0 0" width="2.5" height="2.5" src="#mappiece4" material="alphaTest:0.5" shadow></a-image>
     </a-marker>
     <a-marker id="mappiece5" preset="pattern" type="pattern" url="markers/papermap5.patt">
-      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#mappiece5" material="alphaTest:0.5" shadow></a-image>
+      <a-image position="0 .25 0" rotation="-90 0 0" width="2.5" height="2.5" src="#mappiece5" material="alphaTest:0.5" shadow></a-image>
     </a-marker>
     <a-marker id="mappiece6" preset="pattern" type="pattern" url="markers/papermap6.patt">
-      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#mappiece6" material="alphaTest:0.5" shadow></a-image>
+      <a-image position="0 .25 0" rotation="-90 0 0" width="2.5" height="2.5" src="#mappiece6" material="alphaTest:0.5" shadow></a-image>
     </a-marker>
 
     <!-- Word Clues -->
@@ -667,6 +691,7 @@
     var begin = document.getElementById("begin");
     var objectives = document.getElementById("pivaObjectives");
     var menuMiddle = document.getElementById("menuMiddle");
+    var hintAsk = document.getElementById("hintAsk");
     // need music piece when it is done!
 
 
@@ -800,7 +825,7 @@
     }
     //Checks to see if pattern is correct
     function mapcheckerfunction(){
-      if(location1.className == "map1" && location2.className == "map2" && location3.className == "map3" && location4.className == "map4" && location5.className == "map5" && location6.className == "map6"){
+      if(location1.className == "map5" && location2.className == "map4" && location3.className == "map6" && location4.className == "map2" && location5.className == "map1" && location6.className == "map3"){
         prize2.classList.remove("hide");
         prize2.classList.add("prize2");
         checkmark.classList.add("checkmark");
@@ -864,6 +889,8 @@
     }
 
     function pivaHintRequestFunction(){
+      hintAsk.classList.remove("hintAsk");
+      hintAsk.classList.add("sentHintIndicator");
       room.components.sharedspace.send('*', {
         type: 'pivaHintRequested'
       })
@@ -964,6 +991,8 @@
         } else{
           hintsId.innerHTML = hintsId.innerHTML + "<br />" + evt.detail.message.mainmessage;
         }
+        hintAsk.classList.remove("sentHintIndicator");
+        hintAsk.classList.add("hintAsk");
       }
       if (evt.detail.message.type === 'pivaReset'){
           startTime();

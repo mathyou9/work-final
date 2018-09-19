@@ -19,6 +19,14 @@ body{
   left: 13vw;
   top: 10vw
 }
+.musicImg{
+  width: 72vw;
+  height: 96vw;
+  position: absolute;
+  display: block;
+  left: 13vw;
+  top: 0vw;
+}
 .continue{
   width: 30vw;
   position: absolute;
@@ -32,6 +40,20 @@ body{
   background-repeat: no-repeat;
   color: white;
 }
+.continue1{
+  width: 30vw;
+  position: absolute;
+  display: block;
+  bottom: 30vw;
+  left: 32vw;
+  height: 8vw;
+  background-image:url(../img/Continue.svg);
+  background-size: contain;
+  background-position: right;
+  background-repeat: no-repeat;
+  color: white;
+}
+
 .fullMap{
   width: 90vw;
   height: 70vw;

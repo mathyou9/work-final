@@ -404,6 +404,19 @@
         -webkit-transform: translateY(90vh);
         transition: transform .3s;
       }
+      .sentHintIndicator{
+        background-image: url(img/Sent.svg);
+        backgroud-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        height: 5vw;
+        width: 100%;
+      }
+      .objectiveContainer{
+        position: relative;
+        width: 80%;
+        left: 10%;
+      }
   </style>
 </head>
 
@@ -419,7 +432,7 @@
     </div>
   </div>
   <div class="menuBottom" id="menuMiddle">
-    <div class="hintAsk" onclick="pivaHintRequestFunction();"></div>
+    <div class="hintAsk" id="hintAsk" onclick="pivaHintRequestFunction();"></div>
     <div class="objectivesAsk" onclick="closeRules();"></div>
     <div class="menuCloser" onclick="loadMenus();"></div>
   </div>
@@ -427,35 +440,40 @@
   </div>
   <div class="timer" id="timer"></div>
   <div class="objectives" id="pivaObjectives">
-    Rules:<br />
-    <ol>
-      <li>
-        Dont touch things in this room like the pictures and statues.
-      </li>
-      <li>
-        Shelves are ok to touch, as long as you replace the documents that you remove.
-      </li>
-      <li>
-        If things are locked don't break locks.
-      </li>
-      <li>
-        This is an amazing room in campus and we need to respect it. Please take the best care of it you can while enjoying the escape room.
-      </li>
-    </ol>
-    Objectives: <br />
-    <ol>
-      <li>
-        Find the music that Emily threw in this room to prove your innocence.
-      </li>
-      <li>
-        Find and complete the puzzle map. You will need this to know where to take the music.
-      </li>
-      <li>
-        Find the four-letter code goes to the lock on the door handle.
-      </li>
-    </ol>
-    By clicking begin below you agree to the rules above, and are willing to abide with them.
-    <div class="begin" id="begin" onclick="closeRules();"></div>
+    <div class="objectiveContainer">
+      Objectives: <br />
+      <ol>
+        <li>
+          Emily switched the lock on Stephanys case! Find the clues to unlock it.
+          <!--
+          Solve the puzzles to find the combination to the lock.
+        -->
+        </li>
+        <li>
+          Place the music inside so the case so Stephany can have it in time for her recital!
+          <!--
+          Place the stolen music in its place, before BYU police come in 10 minutes.
+        -->
+        </li>
+      </ol>
+      Rules:<br />
+      <ol>
+        <li>
+          Don't reach over the glass in this room.
+        </li>
+        <li>
+          Use your iPad to scan the targets around the room for clues. Some targets will be hidden.
+        </li>
+        <li>
+          Please do not touch or move anything on display. You will not need to move them as part of the escape room.
+        </li>
+        <li>
+          Please take the best care of the room that you can while enjoying the escape room!
+        </li>
+      </ol>
+      By clicking begin below you agree to the rules above, and are willing to abide with them.
+      <div class="begin" id="begin" onclick="closeRules();"></div>
+    </div>
   </div>
   <div class="hide" id="defaultOverlay">
     <div class="overlayTitle" id="overlayTitle"></div>
@@ -488,6 +506,9 @@
 
         <!-- Concluding words and last goodbye -->
         <img id="ending" src="img/MusicReturn.png"/>
+
+        <!-- Decipher -->
+        <img id="decipher" src="img/Decipher.svg" />
       -->
       </a-assets>
 
@@ -511,10 +532,12 @@
       </a-marker>
 
       <!-- Music Stand Rejection -->
+      <!--
       <a-marker id="musicStandRejection" preset="pattern" type="pattern" url="markers/treasuremapTarget.patt">
         <a-entity gltf-model="#musicStand" position="0 1 1" rotation="-90 0 0" material="alphaTest:0.5" shadow animation-mixer></a-entity>
         <a-light type="point" color="#FFEA86" position="0 0 -9"></a-light>
       </a-marker>
+    -->
 
       <!-- MusicReturn -->
       <a-marker id="image16" preset="pattern" type="pattern" url="markers/typewriterTarget.patt">
@@ -524,11 +547,12 @@
       <!--lloyd whiteboard trick -->
       <!--
       <a-marker id="mapRedeemMarker" preset="pattern" type="pattern" url="markers/diamondStencilTarget.patt">
-        <a-image position="0 .25 0" rotation="-90 0 0" width="1" height="1" src="#hotcold3" material="alphaTest:0.5" shadow></a-image>
+        <a-image position="0 .25 0" rotation="-90 0 0" width="1" height="1" src="#decipher" material="alphaTest:0.5" shadow></a-image>
       </a-marker>
     -->
+
       <a-marker id="mapRedeemMarker" preset="pattern" type="pattern" url="markers/triangleTarget.patt">
-        <a-image position="0 0 0" rotation="-90 0 0" width="1" height="1" src="#ending" material="alphaTest:0.5" shadow></a-image>
+        <a-image position="0 0 0" rotation="-90 0 0" width="1" height="1" src="#decipher" material="alphaTest:0.5" shadow></a-image>
       </a-marker>
 
 
@@ -553,38 +577,16 @@
     var room = document.querySelector('[sharedspace]');
     var box1 = document.querySelector('#image1');
     var mapRedeem = document.querySelector('#mapRedeemMarker');
-    var location1 = document.getElementById("map1location");
-    var location2 = document.getElementById("map2location");
-    var location3 = document.getElementById("map3location");
-    var location4 = document.getElementById("map4location");
-    var location5 = document.getElementById("map5location");
-    var location6 = document.getElementById("map6location");
-    var lock = document.getElementById("lockMarker");
-    var prize2 = document.getElementById("prize2");
-    var prize3 = document.getElementById("prize3");
-    var redeemOverlay = document.getElementById("redeemOverlay");
-    var tempContinue = document.getElementById("tempContinue");
-    var contentId = document.getElementById("contentId");
-    var pivaChecker = document.getElementById("pivaChecker");
     var wordInput = document.getElementById("wordInput");
     var closerId = document.getElementById("closerId");
     var changeThisClass1 = document.getElementById("changeThisClass1");
     var changeThisClass2 = document.getElementById("changeThisClass2");
     var overlayID = document.getElementById("overlayID");
     var hintsId = document.getElementById("hintsid");
-    var checkmark = document.getElementById("checkmark");
-    var mapChecker = document.getElementById("mapchecker");
-    var mapCloser = document.getElementById("mapCloser");
-    var mapIndicator = document.getElementById("mapIndicator");
-    var textRecievedMap = document.getElementById("textRecievedMap");
-    var obtainMusic = document.getElementById("obtainMusic");
-    var defaultOverlay = document.getElementById("defaultOverlay");
-    var overlayTitle = document.getElementById("overlayTitle");
-    var overlayDescription = document.getElementById("overlayDescription");
-    var overlayPic = document.getElementById("overlayPic");
     var begin = document.getElementById("begin");
     var objectives = document.getElementById("pivaObjectives");
     var menuMiddle = document.getElementById("menuMiddle");
+    var hintAsk = document.getElementById("hintAsk");
     // need music piece when it is done!
 
 
@@ -626,7 +628,6 @@
       document.getElementById("timer").innerHTML = sm + " : " + ss;
     }
 
-
     function defaultOverlayRemove(){
       defaultOverlay.classList.remove("defaultOverlay");
       defaultOverlay.classList.add("hide");
@@ -660,6 +661,8 @@
     }
 
     function pivaHintRequestFunction(){
+      hintAsk.classList.add("sentHintIndicator");
+      hintAsk.classList.remove("hintAsk");
       room.components.sharedspace.send('*', {
         type: 'lloydHintRequested'
       })
@@ -672,6 +675,8 @@
         } else{
           hintsId.innerHTML = hintsId.innerHTML + "<br />" + evt.detail.message.mainmessage;
         }
+        hintAsk.classList.remove("sentHintIndicator");
+        hintAsk.classList.add("hintAsk");
       }
       if (evt.detail.message.type === 'lloydReset'){
           startTime();
