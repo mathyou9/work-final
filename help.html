@@ -32,30 +32,49 @@
         Click here to stop the timer
       </div>
       <div class="requestedHints" id="requestedHints"></div>
+      <div class="resetPiva" id="resetPiva" onclick="resetPiva();">
+        Click here to reset
+      </div>
     </div>
+
+
     <div class="lloyd">
-      Completed:
+      completed:
       <div class="completed">
-        <div class="hide" id="image1"></div>
+        <div class="hide" id="map"></div>
       </div>
       Send hint:
       <div class="customHint" id="lloydCustomHint" contenteditable="true"></div>
-      <div class="send" id="lloydSend" onclick="lloydSendHint();">
+      <div class="send" id="send" onclick="lloydSendHint();">
         send
       </div>
       Sent hints:
-      <div class="sent" id="lloydSent"></div>
+      <div class="lloydSent" id="lloydSent"></div>
+      <div class="resetTimer" id="lloydReset" onclick="lloydResetTimer();">
+        Click here to reset the timer
+      </div>
+      <div class="stopTimer" id="stopLloydTimer" onclick="stopLloydTimer();">
+        Click here to stop the timer
+      </div>
+      <div class="requestedHints" id="lloydRequestedHints"></div>
+      <div class="resetLloyd" id="resetLloyd" onclick="resetLloyd();">
+        Click here to reset
+      </div>
     </div>
     <script>
-       var requestedHints = document.getElementById('requestedHints');
-       var now = null;
+      var requestedHints = document.getElementById('requestedHints');
+      var lloydRequestedHints = document.getElementById('lloydRequestedHints');
+      var nowLloyd = null;
+      var now = null;
       var currentUrl = new URL(window.location);
       var roomName = currentUrl.search.substr(1);
       var room = document.querySelector('[sharedspace]');
 
       // Sent buttons
       var sent = document.getElementById("pivaSent");
+      var lloydSent = document.getElementById("lloydSent");
       var customHint = document.getElementById("pivaCustomHint");
+      var lloydCustomHint = document.getElementById("lloydCustomHint");
 
       var map = document.getElementById("map");
 
@@ -72,6 +91,18 @@
           mainmessage: customHint.innerHTML
         })
       }
+      function lloydSendHint(){
+        if(lloydSent.innerHTML == ""){
+          lloydSent.innerHTML = lloydSent.innerHTML + lloydCustomHint.innerHTML;
+        }
+        else{
+          lloydSent.innerHTML = lloydSent.innerHTML + "<br />" + lloydCustomHint.innerHTML;
+        }
+        room.components.sharedspace.send('*', {
+          type: 'hint2',
+          mainmessage: lloydCustomHint.innerHTML
+        })
+      }
 
       function pivaResetTimer(){
         room.components.sharedspace.send('*', {
@@ -82,6 +113,31 @@
         room.components.sharedspace.send('*', {
           type: 'pivaStop'
         })
+      }
+
+      function lloydResetTimer(){
+        room.components.sharedspace.send('*', {
+          type: 'lloydReset'
+        })
+      }
+      function lloydPivaTimer(){
+        room.components.sharedspace.send('*', {
+          type: 'lloydStop'
+        })
+      }
+
+      function resetPiva(){
+        customHint.innerHTML = "";
+        sent.innerHTML = "";
+        map.classList.remove("puzzle1");
+        map.classList.add("hide");
+        requestedHints.innerHTML = "";
+      }
+
+      function resetLloyd(){
+        lloydCustomHint.innerHTML = "";
+        lloydSent.innerHTML = "";
+        lloydRequestedHints.innerHTML = "";
       }
 
       room.addEventListener('participantmessage', function(evt) {
@@ -95,6 +151,10 @@
           if (evt.detail.message.type == 'pivaHintRequested') {
             now = new Date();
             requestedHints.innerHTML = requestedHints.innerHTML + '<br />' + now;
+          }
+          if (evt.detail.message.type == 'lloydHintRequested') {
+            nowLloyd = new Date();
+            lloydRequestedHints.innerHTML = lloydRequestedHints.innerHTML + '<br />' + nowLloyd;
           }
       });
       room.setAttribute('sharedspace', {room: 101, hold: false});

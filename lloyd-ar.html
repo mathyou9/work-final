@@ -1,6 +1,10 @@
 <html>
 
 <head>
+  <meta
+     name='viewport'
+     content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'
+/>
   <!-- these are for loading everything before the viewer is able to do anything. This results in longer loading times but fully functional activity while they are playing. (the next five lines. Jquery is really cool for other things too, as well as bootstrap, but dont worry too much about those. They are just files that allow the aframe-preloader-component.min.js)
   --><!--
   <script src="js/noback.js"></script>
@@ -24,14 +28,11 @@
 
   <style>
       /*
-
       in stylesheets /* start comments and * / without comments ends them.
       stylesheets are written in css. css is important for creating the look of HTML. HTML is the content, CSS is the visual side, and Javascript is the functionality.
       css should always be written in here. It is possible to write it inline with other code throughout the HTML, but really bad practice and bad organization. KEEP IT UP HERE!
       To use css use class="classname" (classname being any name you want) in the HTML then to change what you want that element to look like by typing .classname{} inside the curly brackets type different parameters you would like to change. common ones are width, height, position, display, opacity, background-color, background-image, text-align, left, right, and many more. After you decide what you want to change just put a colon and what you want to change it to. Such as... .name{width: 50%;}
-
       */
-
       body{
           width: 100%;
           height: 100%;
@@ -119,12 +120,25 @@
           background-size: contain;
       }
       .prize2{
-          width: 50px;
-          height: 50px;
+          width: 180px;
+          height: 110px;
           margin: 10px;
           background: url(img/fullFloorMap.png);
+          background-color: #2C3D4D;
+          box-shadow:0px 0px 0px 5px #2C3D4D;
+          background-position: center;
           display: inline-block;
           background-size: contain;
+          background-repeat: no-repeat;
+      }
+      .prize3{
+          width: 100px;
+          height: 110px;
+          margin: 10px;
+          background: url(img/musicScore.png);
+          display: inline-block;
+          background-size: contain;
+          background-repeat: no-repeat;
       }
       .hide{
           display: none;
@@ -138,6 +152,22 @@
           padding-bottom: 10px;
       }
       .overlay{
+        position: fixed;
+        display: inline-block;
+        z-index: 150;
+        width: 80%;
+        height: 80%;
+        background-color: rgba(44,61,77,.9);
+        box-shadow: inset 0px 0px 0px 10px rgba(147,175,199,1);
+        color: white;
+        left: 10%;
+        top: 4%;
+        text-align: center;
+        border-radius: 5vw;
+        padding-top: 10vw;
+        font-size: 3vw;
+      }
+      .defaultOverlay{
         position: fixed;
         display: inline-block;
         z-index: 150;
@@ -172,196 +202,435 @@
       .map1{
         display: inline-block;
         position: relative;
-        width: 30%;
+        width: 20vw;
         background-image: url('img/papermap5.png');
         background-size: contain;
         background-repeat: no-repeat;
-        height: 40%;
+        height: 16vw;
       }
       .map2{
         display: inline-block;
         position: relative;
-        width: 30%;
+        width: 20vw;
         background-image: url('img/papermap_topcenter.png');
         background-size: contain;
         background-repeat: no-repeat;
-        height: 40%;
+        height: 16vw;
       }
       .map3{
         display: inline-block;
         position: relative;
-        width: 30%;
+        width: 20vw;
         background-image: url('img/papermap_topright.png');
         background-size: contain;
         background-repeat: no-repeat;
-        height: 40%;
+        height: 16vw;
       }
       .map4{
         display: inline-block;
         position: relative;
-        width: 30%;
+        width: 20vw;
         background-image: url('img/papermap_bottomleft.png');
         background-size: contain;
         background-repeat: no-repeat;
-        height: 40%;
+        height: 16vw;
       }
       .map5{
         display: inline-block;
         position: relative;
-        width: 30%;
+        width: 20vw;
         background-image: url('img/papermap_bottomcenter.png');
         background-size: contain;
         background-repeat: no-repeat;
-        height: 40%;
+        height: 16vw;
       }
       .map6{
         display: inline-block;
         position: relative;
-        width: 30%;
+        width: 20vw;
         background-image: url('img/papermap_bottomright.png');
         background-size: contain;
         background-repeat: no-repeat;
-        height: 40%;
+        height: 16vw;
       }
-
+      .checkmark{
+        position: fixed;
+        height: 40vw;
+        width: 40vw;
+        display: block;
+        background-image: url("img/Correct_Check.svg");
+        background-size: contain;
+        background-repeat: no-repeat;
+        z-index: 100;
+        left: 35vw;
+        top: 15vh;
+      }
+      .timer{
+        position: fixed;
+        left: 40vw;
+        top: 0px;
+        background-color: rgba(255,255,255,.9);
+        box-shadow: 0px 0px 10px 10px rgba(255,255,255,.9);
+        height: 6vw;
+        width: 20vw;
+        font-size: 5vw;
+        text-align: center;
+        z-index: 100;
+      }
+      .mapIndicator{
+        background-image: url(img/fullFloorMap.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        display: none;
+        position: relative;
+        width: 100%;
+        height: 200px;
+        background-position: center;
+      }
+      .exitDefault{
+        position: relative;
+        display: inline-block;
+        width: 20vw;
+        height: 9vw;
+        background-image: url(img/Continue.svg);
+        background-repeat: no-repeat;
+        background-size: contain;
+      }
+      .spacer{
+        position: relative;
+        display: inline-block;
+        width:50vw;
+      }
+      .mapChecker{
+        background-image: url(img/Submit.svg);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        height: 5vw;
+        width: 100%;
+      }
+      .mapCloser{
+        background-image: url(img/Exit_1.svg);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        height: 5vw;
+        width: 100%;
+      }
+      .objectives{
+        position: fixed;
+        display: inline-block;
+        z-index: 150;
+        width: 80%;
+        height: 80%;
+        background-color: rgba(44,61,77,.9);
+        box-shadow: inset 0px 0px 0px 10px rgba(147,175,199,1);
+        color: white;
+        left: 10%;
+        top: 4%;
+        text-align: center;
+        border-radius: 5vw;
+        padding-top: 10vw;
+        font-size: 3vw;
+      }
+      .objectives ol{
+        text-align: left;
+      }
+      .begin{
+        background-image: url(img/Begin.svg);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        height: 5vw;
+        width: 100%;
+      }
+      .hintAsk{
+        background-image: url(img/Hint.svg);
+        backgroud-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        height: 5vw;
+        width: 100%;
+      }
+      .objectivesAsk{
+        background-image: url(img/Objectives.svg);
+        backgroud-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        height: 5vw;
+        width: 100%;
+      }
+      .menuCloser{
+        background-image: url(img/Exit_1.svg);
+        backgroud-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        height: 5vw;
+        width: 100%;
+      }
+      .menuMiddle{
+        position: fixed;
+        display: inline-block;
+        z-index: 150;
+        width: 40%;
+        height: 20%;
+        background-color: rgba(44,61,77,.9);
+        box-shadow: inset 0px 0px 0px 10px rgba(147,175,199,1);
+        color: white;
+        left: 30%;
+        top: 35%;
+        text-align: center;
+        border-radius: 5vw;
+        padding-top: 10vw;
+        font-size: 3vw;
+        transition: transform .3s;
+      }
+      .menuBottom{
+        position: fixed;
+        display: inline-block;
+        z-index: 150;
+        width: 40%;
+        height: 20%;
+        background-color: rgba(44,61,77,.9);
+        box-shadow: inset 0px 0px 0px 10px rgba(147,175,199,1);
+        color: white;
+        left: 30%;
+        top: 35%;
+        text-align: center;
+        border-radius: 5vw;
+        padding-top: 10vw;
+        font-size: 3vw;
+        transform: translateY(90vh);
+        -webkit-transform: translateY(90vh);
+        transition: transform .3s;
+      }
   </style>
 </head>
 
 <body>
   <div class="scannedhidden" id="changeThisClass1">
     <div class="items">Things you have found:</div>
-    <div class="hide" id="prize1"></div>
-    <div class="hide" id="prize2"></div>
+    <div class="hide" id="prize2" onclick="openMapOverlay();"></div>
+    <div class="hide" id="prize3" onclick="openMusicOverlay();"></div>
   </div>
   <div class="hinthidden" id="changeThisClass2">
-    <div class="items">
-      Hints:
+    <div class="items">Hints:
+      <div class="hintsclass" id="hintsid"></div>
     </div>
+  </div>
+  <div class="menuBottom" id="menuMiddle">
+    <div class="hintAsk" onclick="pivaHintRequestFunction();"></div>
+    <div class="objectivesAsk" onclick="closeRules();"></div>
+    <div class="menuCloser" onclick="loadMenus();"></div>
   </div>
   <div class="buttonChanger" id="buttonChanger" onclick="loadMenus();">
   </div>
-  <!--
-  <div class="hide" id="overlayID">
-    <div class="centerDiv">
-      You have found something very important...
-      Do you know the info you need?
-      Put it here if you do...
-      <div id="userInput" class="inputBox" contenteditable="true">Input here...</div>
-      <button class="buttonOverlayExit" onclick="overlayRemove()">Click to go back to AR</button>
-      <button id="buttonid" class="buttonclass" type="button" onclick="myChecker()">
-          Submit
-      </button>
-    </div>
+  <div class="timer" id="timer"></div>
+  <div class="objectives" id="pivaObjectives">
+    Rules:<br />
+    <ol>
+      <li>
+        Dont touch things in this room like the pictures and statues.
+      </li>
+      <li>
+        Shelves are ok to touch, as long as you replace the documents that you remove.
+      </li>
+      <li>
+        If things are locked don't break locks.
+      </li>
+      <li>
+        This is an amazing room in campus and we need to respect it. Please take the best care of it you can while enjoying the escape room.
+      </li>
+    </ol>
+    Objectives: <br />
+    <ol>
+      <li>
+        Find the music that Emily threw in this room to prove your innocence.
+      </li>
+      <li>
+        Find and complete the puzzle map. You will need this to know where to take the music.
+      </li>
+      <li>
+        Find the four-letter code goes to the lock on the door handle.
+      </li>
+    </ol>
+    By clicking begin below you agree to the rules above, and are willing to abide with them.
+    <div class="begin" id="begin" onclick="closeRules();"></div>
   </div>
-  -->
-  <div class="hide" id="redeemOverlay">
-    <div class="centerDiv">
-      Click to arrange the map pieces the way that they should be. <br />
-      <div class="map1" id="map1location" onclick="changeimage(this);"></div>
-      <div class="map1" id="map2location" onclick="changeimage(this);"></div>
-      <div class="map1" id="map3location" onclick="changeimage(this);"></div>
-      <div class="map1" id="map4location" onclick="changeimage(this);"></div>
-      <div class="map1" id="map5location" onclick="changeimage(this);"></div>
-      <div class="map1" id="map6location" onclick="changeimage(this);"></div>
-      <div class="mapchecker" id="mapchecker" onclick="mapcheckerfunction();">
-        Click here to see if the pattern is correct
-      </div>
-    </div>
+  <div class="hide" id="defaultOverlay">
+    <div class="overlayTitle" id="overlayTitle"></div>
+    <div class="overlayDescription" id="overlayDescription"></div>
+    <div class="overlayPic" id="overlayPic"></div> <br />
+    <div class="spacer"></div>
+    <div class="exitDefault" id="exitDefault" onclick="defaultOverlayRemove();"></div>
   </div>
   <div class="hide" id="tempContinue">
     <div class="centerDiv">
-      This doesnt look pretty right now, but will. Continue Onward using the map!
+      <div class="content" id="contentId"></div>
+      <div class="inputHere" id="wordInput" contenteditable="true"></div>
     </div>
-    <div class="mapchecker" id="closer" onclick="closerFunction();">
-      click here to close
-    </div>
+    <div class="mapchecker" id="pivaChecker" onclick="pivaCheckerFunction();"></div>
+    <div class="closer" id="closerId" onclick="closerFunction();"></div>
   </div>
   <a-scene vr-mode-ui="enabled: false" preloader embedded sharedspace avatars arjs='debugUIEnabled:false;'>
-    <a-assets>
-      <!-- Music Stand -->
-      <a-asset-item id="musicStand" src="img/MusicStandRejection.gltf"></a-asset-item>
+      <a-assets>
+        <!-- Music Stand -->
+        <a-asset-item id="musicStand" src="img/MusicStandRejection.gltf"></a-asset-item>
 
-      <!-- CLUES 2, 0, 1, 0 -->
-      <img id="lloyd1" src="img/2.png" />
-      <img id="lloyd2" src="img/0-1.png" />
-      <img id="lloyd3" src="img/1.png" />
-      <img id="lloyd4" src="img/0-2.png" />
+        <!-- CLUES 2, 0, 1, 0 -->
+        <img id="lloyd1" src="img/2.png" />
+        <img id="lloyd2" src="img/0-1.png" />
+        <img id="lloyd3" src="img/1.png" />
+        <img id="lloyd4" src="img/0-2.png" />
 
-      <!-- Briefcase tag with clue -->
-      <img id="briefcaseClue" src="img/YearConstruction.png"/>
+        <!-- Briefcase tag with clue -->
+        <img id="briefcaseClue" src="img/YearConstruction.png"/>
 
-      <!-- Concluding words and last goodbye -->
-      <img id="ending" src="img/MusicReturn.svg"/>
+        <!-- Concluding words and last goodbye -->
+        <img id="ending" src="img/MusicReturn.png"/>
+      -->
+      </a-assets>
+
+      <!-- 2010 -->
+      <a-marker id="image16" preset="pattern" type="pattern" url="markers/bookTarget.patt">
+        <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#lloyd1" material="alphaTest:0.5" shadow></a-image>
+      </a-marker>
+      <a-marker id="image16" preset="pattern" type="pattern" url="markers/catTarget.patt">
+        <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#lloyd2" material="alphaTest:0.5" shadow></a-image>
+      </a-marker>
+      <a-marker id="image16" preset="pattern" type="pattern" url="markers/cosmoTarget.patt">
+        <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#lloyd3" material="alphaTest:0.5" shadow></a-image>
+      </a-marker>
+      <a-marker id="image16" preset="pattern" type="pattern" url="markers/keyTarget.patt">
+        <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1" src="#lloyd4" material="alphaTest:0.5" shadow></a-image>
+      </a-marker>
+
+      <!--Year of Construction on the briefcase -->
+      <a-marker id="image16" preset="pattern" type="pattern" url="markers/musicstandTarget.patt">
+        <a-image position="0 .25 0" rotation="-90 0 0" width="2" height="1.5" src="#briefcaseClue" material="alphaTest:0.5" shadow></a-image>
+      </a-marker>
+
+      <!-- Music Stand Rejection -->
+      <a-marker id="musicStandRejection" preset="pattern" type="pattern" url="markers/treasuremapTarget.patt">
+        <a-entity gltf-model="#musicStand" position="0 1 1" rotation="-90 0 0" material="alphaTest:0.5" shadow animation-mixer></a-entity>
+        <a-light type="point" color="#FFEA86" position="0 0 -9"></a-light>
+      </a-marker>
+
+      <!-- MusicReturn -->
+      <a-marker id="image16" preset="pattern" type="pattern" url="markers/typewriterTarget.patt">
+        <a-image position="0 0 0" rotation="-90 0 0" width="1.5" height="1.5" src="#ending" material="alphaTest:0.5" shadow></a-image>
+      </a-marker>
+
+      <!--lloyd whiteboard trick -->
+      <!--
+      <a-marker id="mapRedeemMarker" preset="pattern" type="pattern" url="markers/diamondStencilTarget.patt">
+        <a-image position="0 .25 0" rotation="-90 0 0" width="1" height="1" src="#hotcold3" material="alphaTest:0.5" shadow></a-image>
+      </a-marker>
     -->
-    </a-assets>
-
-    <!-- 2010 -->
-    <a-marker id="image16" preset="pattern" type="pattern" url="markers/bookTarget.patt">
-      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#lloyd1" material="alphaTest:0.5" shadow></a-image>
-    </a-marker>
-    <a-marker id="image16" preset="pattern" type="pattern" url="markers/catTarget.patt">
-      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#lloyd2" material="alphaTest:0.5" shadow></a-image>
-    </a-marker>
-    <a-marker id="image16" preset="pattern" type="pattern" url="markers/cosmoTarget.patt">
-      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1.5" src="#lloyd3" material="alphaTest:0.5" shadow></a-image>
-    </a-marker>
-    <a-marker id="image16" preset="pattern" type="pattern" url="markers/keyTarget.patt">
-      <a-image position="0 .25 0" rotation="-90 0 0" width="1.5" height="1" src="#lloyd4" material="alphaTest:0.5" shadow></a-image>
-    </a-marker>
-
-    <!--Year of Construction on the briefcase -->
-    <a-marker id="image16" preset="pattern" type="pattern" url="markers/musicstandTarget.patt">
-      <a-image position="0 .25 0" rotation="-90 0 0" width="2" height="1.5" src="#briefcaseClue" material="alphaTest:0.5" shadow></a-image>
-    </a-marker>
-
-    <!-- Music Stand Rejection -->
-    <a-marker id="musicStandRejection" preset="pattern" type="pattern" url="markers/treasuremapTarget.patt">
-      <a-entity gltf-model="#musicStand" position="0 1 1" rotation="-90 0 0" material="alphaTest:0.5" shadow animation-mixer></a-entity>
-      <a-light type="point" color="#FFEA86" position="0 0 -9"></a-light>
-    </a-marker>
-
-    <!-- MusicReturn -->
-    <a-marker id="image16" preset="pattern" type="pattern" url="markers/typewriterTarget.patt">
-      <a-image position="0 0 0" rotation="-90 0 0" width="1.5" height="1.5" src="#ending" material="alphaTest:0.5" shadow></a-image>
-    </a-marker>
-
-    <!--lloyd whiteboard trick -->
-    <!--
-    <a-marker id="mapRedeemMarker" preset="pattern" type="pattern" url="markers/diamondStencilTarget.patt">
-      <a-image position="0 .25 0" rotation="-90 0 0" width="1" height="1" src="#hotcold3" material="alphaTest:0.5" shadow></a-image>
-    </a-marker>
--->
-    <a-marker id="mapRedeemMarker" preset="pattern" type="pattern" url="markers/triangleTarget.patt">
-      <a-image position="0 0 0" rotation="-90 0 0" width="1" height="1" src="#ending" material="alphaTest:0.5" shadow></a-image>
-    </a-marker>
+      <a-marker id="mapRedeemMarker" preset="pattern" type="pattern" url="markers/triangleTarget.patt">
+        <a-image position="0 0 0" rotation="-90 0 0" width="1" height="1" src="#ending" material="alphaTest:0.5" shadow></a-image>
+      </a-marker>
 
 
 
 
-    <!-- markers that dont work that well -->
+      <!-- markers that dont work that well -->
 
 
-    <!-- animation files with marker
-    <a-marker id="musicStandRejection" preset="pattern" type="pattern" url="lloyd.patt">
-      <a-entity gltf-model="#musicStand" position="0 1 1" rotation="-90 0 0" material="alphaTest:0.5" shadow animation-mixer></a-entity>
-      <a-light type="point" color="#FFEA86" position="0 0 -9"></a-light>
-    </a-marker>
-  -->
+      <!-- animation files with marker
+      <a-marker id="musicStandRejection" preset="pattern" type="pattern" url="lloyd.patt">
+        <a-entity gltf-model="#musicStand" position="0 1 1" rotation="-90 0 0" material="alphaTest:0.5" shadow animation-mixer></a-entity>
+        <a-light type="point" color="#FFEA86" position="0 0 -9"></a-light>
+      </a-marker>
+    -->
     <a-entity camera>
-      <a-entity cursor="rayOrigin: mouse;"></a-entity>
+      <a-entity cursor="fuse: false; rayOrigin: mouse;"  ></a-entity>
     </a-entity>
   </a-scene>
   <script>
     var currentUrl = new URL(window.location);
     var roomName = currentUrl.search.substr(1);
     var room = document.querySelector('[sharedspace]');
-    var  box1 = document.querySelector('#image1');
+    var box1 = document.querySelector('#image1');
+    var mapRedeem = document.querySelector('#mapRedeemMarker');
+    var location1 = document.getElementById("map1location");
+    var location2 = document.getElementById("map2location");
+    var location3 = document.getElementById("map3location");
+    var location4 = document.getElementById("map4location");
+    var location5 = document.getElementById("map5location");
+    var location6 = document.getElementById("map6location");
+    var lock = document.getElementById("lockMarker");
+    var prize2 = document.getElementById("prize2");
+    var prize3 = document.getElementById("prize3");
+    var redeemOverlay = document.getElementById("redeemOverlay");
+    var tempContinue = document.getElementById("tempContinue");
+    var contentId = document.getElementById("contentId");
+    var pivaChecker = document.getElementById("pivaChecker");
+    var wordInput = document.getElementById("wordInput");
+    var closerId = document.getElementById("closerId");
     var changeThisClass1 = document.getElementById("changeThisClass1");
     var changeThisClass2 = document.getElementById("changeThisClass2");
     var overlayID = document.getElementById("overlayID");
-    var prize1 = document.getElementById("prize1");
+    var hintsId = document.getElementById("hintsid");
+    var checkmark = document.getElementById("checkmark");
+    var mapChecker = document.getElementById("mapchecker");
+    var mapCloser = document.getElementById("mapCloser");
+    var mapIndicator = document.getElementById("mapIndicator");
+    var textRecievedMap = document.getElementById("textRecievedMap");
+    var obtainMusic = document.getElementById("obtainMusic");
+    var defaultOverlay = document.getElementById("defaultOverlay");
+    var overlayTitle = document.getElementById("overlayTitle");
+    var overlayDescription = document.getElementById("overlayDescription");
+    var overlayPic = document.getElementById("overlayPic");
+    var begin = document.getElementById("begin");
+    var objectives = document.getElementById("pivaObjectives");
+    var menuMiddle = document.getElementById("menuMiddle");
     // need music piece when it is done!
 
+
+    //Timer
+    var sm = 10;
+    var ss = 60;
+    var thenDate = new Date();
+    var thenDate2;
+    var sNow = thenDate.getSeconds();
+    var sThen;
+    var setSecondTime;
+    var nowDate;
+    var minutes;
+    function startTime(){
+      thenDate2 = new Date();
+      sNow = thenDate2.getSeconds();
+      if(!setSecondTime){
+        setSecondTime = setInterval(timerGoing, 1000);
+      }
+    }
+    function timerGoing(){
+      nowDate = new Date();
+      sThen = nowDate.getSeconds();
+      ss = 60 - (sThen - sNow);
+      if(ss > 59){
+        ss = ss - 60;
+      }
+      //if(ss >= 59){
+      //  sm = sm - 1;
+      //}
+      minutes = Math.floor(((nowDate - thenDate2)/1000)/60);
+      sm = 9-minutes;
+      if(sm < 0){
+        sm = 0;
+        ss = 0;
+        clearInterval(setSecondTime);
+        setSecondTime = false;
+      }
+      document.getElementById("timer").innerHTML = sm + " : " + ss;
+    }
+
+
+    function defaultOverlayRemove(){
+      defaultOverlay.classList.remove("defaultOverlay");
+      defaultOverlay.classList.add("hide");
+    }
 
     //These lines fix a scrolling problem.
     var fixed = document.getElementById('buttonChanger');
@@ -369,56 +638,48 @@
             e.preventDefault();
     }, false);
 
-/*
-    function myChecker(){
-      if(document.getElementById("userInput").innerHTML == "hello"){
-        document.getElementById("prize1").classList.remove("hide");
-        document.getElementById("prize1").classList.add("prize1");
-        document.getElementById("buttonid").innerHTML = "Congrats you got it!";
-        room.components.sharedspace.send('*',{
-          type: 'image1'
-        })
-      }
-    }
-*/
-
+    //opens menu onclick
     function loadMenus(){
       changeThisClass1.classList.toggle("scannedhidden");
       changeThisClass1.classList.toggle("scanned");
       changeThisClass2.classList.toggle("hinthidden");
       changeThisClass2.classList.toggle("hints");
+      menuMiddle.classList.toggle("menuMiddle");
+      menuMiddle.classList.toggle("menuBottom");
 
     }
-
+    //removes overlay
     function overlayRemove(){
       overlayID.classList.remove("overlay");
       overlayID.classList.add("hide");
     }
 
-     box1.addEventListener("click", function() {
-      //document.getElementById('overlayID').classList.remove("hide");
-      //document.getElementById('overlayID').classList.add("overlay");
-      prize1.classList.toggle("hide");
-      prize1.classList.toggle("prize1");
-      room.components.sharedspace.send('*', {
-        type: 'image1'
-      })
-    });
+    function closeRules(){
+      objectives.classList.toggle("objectives");
+      objectives.classList.toggle("hide");
+    }
 
-    /*
-    box2.addEventListener("click", function() {
-      document.getElementById("prize2").classList.toggle("hide");
-      document.getElementById("prize2").classList.toggle("prize2");
+    function pivaHintRequestFunction(){
       room.components.sharedspace.send('*', {
-        type: 'image2'
+        type: 'lloydHintRequested'
       })
-    });
-    */
+    }
 
     room.addEventListener('participantmessage', function(evt) {
-
-
-
+      if (evt.detail.message.type === 'hint2'){
+        if(hintsId.innerHTML == ""){
+          hintsId.innerHTML = hintsId.innerHTML + evt.detail.message.mainmessage;
+        } else{
+          hintsId.innerHTML = hintsId.innerHTML + "<br />" + evt.detail.message.mainmessage;
+        }
+      }
+      if (evt.detail.message.type === 'lloydReset'){
+          startTime();
+      }
+      if (evt.detail.message.type === 'lloydStop'){
+        clearInterval(setSecondTime);
+        setSecondTime = false;
+      }
       /*
       if (evt.detail.message.type === 'image2') {
         document.getElementById("prize2").classList.toggle("hide");
@@ -427,11 +688,7 @@
       */
 
     });
-    room.setAttribute('sharedspace', {
-      room: roomName,
-      hold: false
-    });
+    room.setAttribute('sharedspace', {room: 101, hold: false});
   </script>
 </body>
-
 </html>
