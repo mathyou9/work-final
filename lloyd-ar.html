@@ -439,6 +439,10 @@
   <div class="buttonChanger" id="buttonChanger" onclick="loadMenus();">
   </div>
   <div class="timer" id="timer"></div>
+  <div class="menuBottom" id="timesUp"><h1>Times Up!</h1>
+  <div class="exitDefault" onclick="closeTimesUp();">
+
+  </div></div>
   <div class="objectives" id="pivaObjectives">
     <div class="objectiveContainer">
       Objectives: <br />
@@ -460,6 +464,9 @@
       <ol>
         <li>
           Don't reach over the glass in this room.
+        </li>
+        <li>
+          Don't click the refresh or back buttons at the top. The game will not operate correctly if you do.
         </li>
         <li>
           Use your iPad to scan the targets around the room for clues. Some targets will be hidden.
@@ -587,6 +594,7 @@
     var objectives = document.getElementById("pivaObjectives");
     var menuMiddle = document.getElementById("menuMiddle");
     var hintAsk = document.getElementById("hintAsk");
+    var timesUp = document.getElementById("timesUp");
     // need music piece when it is done!
 
 
@@ -618,7 +626,7 @@
       //  sm = sm - 1;
       //}
       minutes = Math.floor(((nowDate - thenDate2)/1000)/60);
-      sm = 9-minutes;
+      sm = 1-minutes;
       if(sm < 0){
         sm = 0;
         ss = 0;
@@ -626,6 +634,10 @@
         setSecondTime = false;
       }
       document.getElementById("timer").innerHTML = sm + " : " + ss;
+      if(document.getElementById("timer").innerHTML == "0 : 0"){
+        timesUp.classList.add("menuMiddle");
+        timesUp.classList.remove("menuBottom");
+      }
     }
 
     function defaultOverlayRemove(){
@@ -666,6 +678,11 @@
       room.components.sharedspace.send('*', {
         type: 'lloydHintRequested'
       })
+    }
+
+    function closeTimesUp(){
+      timesUp.classList.add("menuBottom");
+      timesUp.classList.remove("menuMiddle");
     }
 
     room.addEventListener('participantmessage', function(evt) {

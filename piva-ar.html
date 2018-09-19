@@ -309,6 +309,9 @@
         height: 5vw;
         width: 100%;
       }
+      .mapChecker:hover{
+        background-image: url(img/clickedSubmit.svg);
+      }
       .mapCloser{
         background-image: url(img/Exit_1.svg);
         background-size: contain;
@@ -417,6 +420,28 @@
         width: 80%;
         left: 10%;
       }
+      .youRecievedClass{
+        text-align: center;
+        position: relative;
+        padding-bottom: 3vw;
+        left: 10%;
+        width: 80%;
+      }
+      .openMenu{
+        background-image: url(img/ViewHint.svg);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        height: 5vw;
+        width: 100%;
+      }
+      .inputHere{
+        display: block;
+        background: white;
+        border: 1px solid #666;
+        border-radius: 25px;
+        color: black;
+      }
   </style>
 </head>
 
@@ -465,6 +490,9 @@
       Rules:<br />
       <ol>
         <li>
+          Don't click the refresh or back buttons at the top. The game will not operate correctly if you do.
+        </li>
+        <li>
           Use your iPad to scan the targets around the room for clues. Some targets will be hidden.
         </li>
         <li>
@@ -480,6 +508,10 @@
       By clicking begin below you agree to the rules above, and are willing to abide with them.
       <div class="begin" id="begin" onclick="closeRules();"></div>
     </div>
+  </div>
+  <div class="menuBottom" id="youRecievedHint">
+    <div class="youRecievedClass">You recieved a hint. Click below to view it!</div>
+    <div class="openMenu" onclick="loadMenusAndCloseHint();"></div>
   </div>
   <!--
   <div class="hide" id="overlayID">
@@ -498,7 +530,7 @@
   <div class="hide" id="redeemOverlay">
     <div class="hide" id="checkmark"></div>
     <div class="centerDiv">
-      Click to arrange the map pieces the way that they should be. <br /><br /><br />
+      <div class="idk" id="arrangeError">Click to arrange the map pieces the way that they should be. <br /><br /><br /></div>
       <div class="map1" id="map1location" onclick="changeimage(this);"></div>
       <div class="map1" id="map2location" onclick="changeimage(this);"></div>
       <div class="map1" id="map3location" onclick="changeimage(this);"></div>
@@ -522,7 +554,7 @@
   <div class="hide" id="tempContinue">
     <div class="centerDiv">
       <div class="content" id="contentId"></div>
-      <div class="inputHere" id="wordInput" contenteditable="true"></div>
+      <div class="hide" id="wordInput" contenteditable="true"></div>
     </div>
     <div class="mapchecker" id="pivaChecker" onclick="pivaCheckerFunction();"></div>
     <div class="closer" id="closerId" onclick="closerFunction();"></div>
@@ -544,7 +576,7 @@
       <img id="PIVA3" src="img/v.png" />
       <img id="PIVA4" src="img/a.png" />
       <!-- Hold On -->
-      <img id="hold" src="img/waitHold.png" />
+      <img id="hold" src="img/touchHere.png" />
       <!-- HOT_COLD_GAME -->
 
       <img id="music1" src="img/Pianississimo.png"/>
@@ -692,6 +724,8 @@
     var objectives = document.getElementById("pivaObjectives");
     var menuMiddle = document.getElementById("menuMiddle");
     var hintAsk = document.getElementById("hintAsk");
+    var youRecievedHint = document.getElementById("youRecievedHint");
+    var arrangeError = document.getElementById("arrangeError");
     // need music piece when it is done!
 
 
@@ -836,6 +870,8 @@
         room.components.sharedspace.send('*', {
           type: 'map'
         })
+      } else{
+        arrangeError.innerHTML = "Incorrect. Please try again!"
       }
     }
     //closes mapchecker overlay
@@ -871,6 +907,17 @@
       menuMiddle.classList.toggle("menuMiddle");
       menuMiddle.classList.toggle("menuBottom");
 
+    }
+    //opens menu and closes hint.
+    function loadMenusAndCloseHint(){
+      changeThisClass1.classList.remove("scannedhidden");
+      changeThisClass1.classList.add("scanned");
+      changeThisClass2.classList.remove("hinthidden");
+      changeThisClass2.classList.add("hints");
+      menuMiddle.classList.add("menuMiddle");
+      menuMiddle.classList.remove("menuBottom");
+      youRecievedHint.classList.remove("menuMiddle");
+      youRecievedHint.classList.add("menuBottom");
     }
     //removes overlay
     function overlayRemove(){
@@ -954,6 +1001,7 @@
       } else{
         contentId.innerHTML = "Input your code here:";
         pivaChecker.style.display = "block";
+        wordInput.classList.add("inputHere");
       }
     });
 
@@ -982,7 +1030,7 @@
         tempContinue.classList.add("overlay");
         contentId.innerHTML = "Someone unlocked the lock, click below to continue!";
         wordInput.classList.remove("hide");
-        pivaChecker.classList.remove("hide");
+        pivaChecker.style.display = "none";
         closerId.innerHTML = "Click here to continue!";
       }
       if (evt.detail.message.type === 'hint1'){
@@ -993,6 +1041,8 @@
         }
         hintAsk.classList.remove("sentHintIndicator");
         hintAsk.classList.add("hintAsk");
+        youRecievedHint.classList.add("menuMiddle");
+        youRecievedHint.classList.remove("menuBottom");
       }
       if (evt.detail.message.type === 'pivaReset'){
           startTime();
